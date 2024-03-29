@@ -54,18 +54,27 @@ app.get('/get-latest-settings', (req, res) => {
   });
 });
 
-
 app.get('/list-saved-entries', (req, res) => {
   try {
-    const entries = fs.readFileSync(saveFilePath, 'utf8')
-      .trim().split('\n')
-      .map(line => JSON.parse(line));
+    const data = fs.readFileSync(saveFilePath, 'utf8');
+    const entries = data.trim().split('\n').map(JSON.parse);
     res.json(entries);
   } catch (error) {
-    console.error('Error listing saved entries:', error);
-    res.status(500).json({ message: 'Error listing saved entries.' });
+    res.status(500).send('Failed to read saved entries.');
   }
 });
+
+// app.get('/list-saved-entries', (req, res) => {
+//   try {
+//     const entries = fs.readFileSync(saveFilePath, 'utf8')
+//       .trim().split('\n')
+//       .map(line => JSON.parse(line));
+//     res.json(entries);
+//   } catch (error) {
+//     console.error('Error listing saved entries:', error);
+//     res.status(500).json({ message: 'Error listing saved entries.' });
+//   }
+// });
 
 app.get('/images/*', (req, res) => {
   const filePath = req.params[0].replace(/\\/g, '/'); // Ensure we use forward slashes

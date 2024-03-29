@@ -12,27 +12,23 @@ export default function Form() {
   const [negativePrompts, setNegativePrompts] = useState('grayscale, bw, bad photo, bad photography, bad art:1.4), (watermark, signature, text font, username, error, logo, words, letters, digits, autograph, trademark, name:1.2), (bad hands, bad anatomy, bad body, bad face, bad teeth, bad arms, bad legs, deformities:1.3), morbid, ugly, mutated malformed, mutilated, poorly lit, bad shadow, draft, cropped, out of frame, cut off, censored, jpeg artifacts, glitch, duplicate');
   const [loras, setLoras] = useState('<lora:add-detail-xl:1>');
   const [cn1Enabled, setCn1Enabled] = useState(true);
-  // New state for manually entered file path
   const [manualFilePath, setManualFilePath] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+  const [savedEntries, setSavedEntries] = useState([]);
+  const [selectedEntryId, setSelectedEntryId] = useState('');
 
   useEffect(() => {
     const fetchSavedEntries = async () => {
       try {
-        const response = await fetch('http://localhost:4000/get-latest-settings');
-        const { settings } = await response.json();
-        if (settings) {
-          // Assuming `settings` directly maps to your state structure; adjust as needed
-          setPrompts(settings.prompts);
-          setMaxFrames(settings.maxFrames);
-          setPositivePrompts(settings.positivePrompts);
-          setNegativePrompts(settings.negativePrompts);
-          setLoras(settings.loras);
-          setCn1Enabled(settings.cn1Enabled);
-          setManualFilePath(settings.cn1VidPath);
-        } else {
-          // If no settings were found, the default state values will be used.
-          console.log("Using default settings.");
+        // Fetch the list of saved settings
+        const response = await fetch('http://localhost:4000/list-saved-entries');
+        const entries = await response.json();
+        setSavedEntries(entries);
+
+        // Fetch the latest settings and apply them
+        if (entries.length > 0) {
+          const mostRecentEntry = entries[entries.length - 1];
+          applySettings(mostRecentEntry);
         }
       } catch (error) {
         console.error("Failed to fetch saved settings:", error);
@@ -42,7 +38,25 @@ export default function Form() {
     fetchSavedEntries();
   }, []);
 
-  
+  const applySettings = (settings) => {
+    setPrompts(settings.prompts);
+    setMaxFrames(settings.maxFrames);
+    setPositivePrompts(settings.positivePrompts);
+    setNegativePrompts(settings.negativePrompts);
+    setLoras(settings.loras);
+    setCn1Enabled(settings.cn1Enabled);
+    setManualFilePath(settings.cn1VidPath);
+  };
+
+  const handleSelectChange = (event) => {
+    const selectedId = event.target.value;
+    setSelectedEntryId(selectedId);
+    const selectedEntry = savedEntries.find(entry => entry.timestamp === selectedId);
+    if (selectedEntry) {
+      applySettings(selectedEntry);
+    }
+  };
+
   const handleAnimationSubmit = async (e) => {
     e.preventDefault();
     // Use manualFilePath in your submission logic
@@ -88,6 +102,15 @@ export default function Form() {
         <form onSubmit={handleImageSubmit} className='mt-4 text-xs'>
           <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
         </form>
+
+           {/* Dropdown to select a saved entry */}
+      <select onChange={handleSelectChange} value={selectedEntryId} className="mb-4">
+        {savedEntries.map(entry => (
+          <option key={entry.timestamp} value={entry.timestamp}>
+            {entry.prompts} - {new Date(entry.timestamp).toLocaleString()}
+          </option>
+        ))}
+      </select>
       </div>
     </>
   );

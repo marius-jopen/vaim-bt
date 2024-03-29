@@ -23,7 +23,12 @@ export function saveEntry({
     cn1Enabled,
     cn1VidPath
   };
-  const entryLine = JSON.stringify(entry) + '\n';
+
+  const entryWithTimestamp = {
+    ...entry,
+    timestamp: new Date().toISOString(), // Add a timestamp
+  };
+  const entryLine = JSON.stringify(entryWithTimestamp) + '\n';
 
   try {
     fs.appendFileSync(saveFilePath, entryLine, 'utf8');
