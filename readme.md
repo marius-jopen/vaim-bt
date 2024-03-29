@@ -27,7 +27,7 @@ Clone this repo into a folder on your local computer.
 
 
 # 4. Install the node_modules for the client
-Click on the bat file called vaim-bt-server.bat
+Click on the bat file called install-dependencies.bat
 
 
 
@@ -46,3 +46,15 @@ Put your Stable Diffusion output folder path here
 # 5. Run the client and the server
 
 Click on the run-client-and-server.bat
+
+
+# 6. More info
+
+To restart the client or the sever, you need to either close ther terminals and the run the run-client-and-server.bat.
+
+Or you go into a terminal and press "Control C" to stop the programm.
+
+To run it again, just write
+```
+npm run start
+```

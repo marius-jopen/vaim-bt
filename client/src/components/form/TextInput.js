@@ -1,5 +1,5 @@
 const TextInput = ({ label, type = 'text', value, onChange }) => (
-  <div className="mb-4">
+  <div className="mb-6">
     <label htmlFor={label} className="block text-sm font-medium leading-6 text-gray-900">
       {label}
     </label>

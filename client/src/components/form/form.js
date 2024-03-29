@@ -30,7 +30,7 @@ export default function Form() {
         <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
           <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
           <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
-          <TextAreaInput label="Loras" value={loras} onChange={(e) => setLoras(e.target.value)} />
+          <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
           <TextInput label="Max Frames" type="number" value={maxFrames} onChange={(e) => setMaxFrames(e.target.value)} required />
           <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
         </form>
