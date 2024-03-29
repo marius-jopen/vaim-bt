@@ -16,14 +16,13 @@ async function generateImage(outputDir, dynamicParameters) {
     };
 
     const entryData = {
-        prompts: dynamicParameters.prompt || "default prompt",
-        positivePrompts: "Your logic or default value",
+        prompts: dynamicParameters.promptsSave || "default prompt",
+        positivePrompts: dynamicParameters.positivePromptsSave || "default value",
         negativePrompts: dynamicParameters.negative_prompt || "default value",
-        // Image generation might not use these, so set defaults or leave out
-        loras: dynamicParameters.loras || "N/A",
-        maxFrames: "N/A",
-        cn1Enabled: false,
-        cn1VidPath: "N/A",
+        loras: dynamicParameters.lorasSave || "N/A",
+        maxFrames: dynamicParameters.maxframesSave || "N/A",
+        cn1Enabled: dynamicParameters.cn1EnabledSave || "N/A",
+        cn1VidPath: dynamicParameters.cn1VidPathSave || "N/A",
       };
   
       // Save the structured entry data

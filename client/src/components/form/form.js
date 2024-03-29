@@ -40,7 +40,7 @@ export default function Form() {
 
   const handleImageSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitImage(e, { prompts, positivePrompts, loras, negativePrompts, cn1Enabled }, setResponseMessage);
+    await handleSubmitImage(e, { prompts, positivePrompts, loras, negativePrompts, cn1Enabled, cn1VidPath: manualFilePath,maxFrames }, setResponseMessage);
   };
 
   return (

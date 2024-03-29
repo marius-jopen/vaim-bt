@@ -1,5 +1,5 @@
 const handleSubmitImage = async (
-  e, { prompts, positivePrompts, loras, negativePrompts }, setResponseMessage
+  e, { prompts, positivePrompts, loras, negativePrompts, maxFrames,cn1VidPath,cn1Enabled }, setResponseMessage
 ) => {
   e.preventDefault();
 
@@ -8,6 +8,13 @@ const handleSubmitImage = async (
   const parameters = {
     prompt: `${formattedPrompts} ${positivePrompts} ${loras}`,
     negative_prompt: negativePrompts,
+    positivePromptsSave: positivePrompts,
+    lorasSave: loras,
+    promptsSave: formattedPrompts,
+    maxframesSave: maxFrames,
+    cn1VidPathSave: cn1VidPath,
+    cn1EnabledSave: cn1Enabled,
+
   };
 
   try {
