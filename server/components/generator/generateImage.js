@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
 import { getImageConfig } from './config.js'; // Adjust the path as necessary
+import { saveEntry } from '../entrySaver.js'; // Adjust the path as necessary
 
 async function generateImage(outputDir, dynamicParameters) {
     // Assume getImageConfig() correctly returns image configuration
@@ -13,6 +14,21 @@ async function generateImage(outputDir, dynamicParameters) {
         ...dynamicParameters,
         ...imageConfig,
     };
+
+    const entryData = {
+        prompts: dynamicParameters.prompt || "default prompt",
+        positivePrompts: "Your logic or default value",
+        negativePrompts: dynamicParameters.negative_prompt || "default value",
+        // Image generation might not use these, so set defaults or leave out
+        loras: dynamicParameters.loras || "N/A",
+        maxFrames: "N/A",
+        cn1Enabled: false,
+        cn1VidPath: "N/A",
+      };
+  
+      // Save the structured entry data
+      saveEntry(entryData);
+  
 
     try {
         const response = await fetch("http://127.0.0.1:7860/sdapi/v1/txt2img", {

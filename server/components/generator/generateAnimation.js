@@ -3,6 +3,7 @@ import { getVideoConfig, getVideoConfigModified, getVideoConfigOriginal } from '
 import getLastImagePathFromPreviousBatch from './lastImagePreviousBatch.js';
 import getNextBatchNumber from './nextBatchNumber.js';
 import readSecondLastPrompt from './secondLastPrompt.js';
+import { saveEntry } from '../entrySaver.js'; // Adjust the path as necessary
 
 class Generator {
   constructor(outputDir) {
@@ -42,6 +43,23 @@ class Generator {
       const videoConfig = getVideoConfig();
       const videoConfigModified = getVideoConfigModified();
       const videoConfigOriginal = getVideoConfigOriginal();
+
+
+       // After setting up your modifiedParameters but before the fetch call:
+      const entryData = {
+        prompts: JSON.stringify(parameters.deforum_settings.prompts), // Assuming this structure; adjust as needed
+        positivePrompts: "Your logic to extract positive prompts",
+        negativePrompts: "Your logic to extract negative prompts",
+        loras: parameters.deforum_settings.loras || "default value",
+        maxFrames: parameters.deforum_settings.max_frames || "default value",
+        cn1Enabled: parameters.deforum_settings.cn_1_enabled || false,
+        cn1VidPath: parameters.deforum_settings.cn_1_vid_path || "N/A",
+        // Add more fields as necessary
+      };
+
+      // Save the structured entry data
+      saveEntry(entryData);
+
 
       // Ensure saveSecondPromptInfo also receives this.outputDir if needed
 

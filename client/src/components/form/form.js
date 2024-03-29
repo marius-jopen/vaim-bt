@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import handleSubmitImage from './handleSubmitImage';
 import handleSubmitAnimation from './handleSubmitAnimation';
 import TextInput from './TextInput';
@@ -15,6 +15,22 @@ export default function Form() {
   // New state for manually entered file path
   const [manualFilePath, setManualFilePath] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+
+  useEffect(() => {
+    const fetchSavedEntries = async () => {
+      const response = await fetch('http://localhost:4000/list-saved-entries');
+      const entries = await response.json();
+      if (entries.length > 0) {
+        const mostRecentEntry = entries[entries.length - 1];
+        // Update your state based on the most recent entry
+        // For example:
+        setPrompts(mostRecentEntry.prompts);
+        // Repeat for other fields...
+      }
+    };
+
+    fetchSavedEntries();
+  }, []);
 
   const handleAnimationSubmit = async (e) => {
     e.preventDefault();

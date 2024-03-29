@@ -3,24 +3,46 @@ import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { basePath } from './config.js'; // Adjust the path as necessary
+import { basePath } from './config.js'; // Ensure this path is correctly imported
 import generateAnimation from './components/generator/generateAnimation.js';
 import LooperFull from './components/looperFull.js';
 import LooperLatest from './components/looperLatest.js';
 import generateImage from './components/generator/generateImage.js';
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const saveFilePath = path.join(__dirname, 'save.txt'); // Path for save.txt in the root
+
+
+
 const app = express();
 const port = 4000;
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const baseDir = path.join(basePath.replace(/\\/g, '/')); 
+
+// Using basePath from your config.js. Make sure it's the intended path
+const baseDir = path.join(basePath.replace(/\\/g, '/'));
+
+// Initialize your components with baseDir if necessary
 const animation = new generateAnimation(baseDir);
 const looperFull = new LooperFull(baseDir);
-const looperLatest = new LooperLatest(baseDir); // Initialize LooperLatest
+const looperLatest = new LooperLatest(baseDir);
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(baseDir, 'images')));
+
+app.get('/list-saved-entries', (req, res) => {
+  try {
+    const entries = fs.readFileSync(saveFilePath, 'utf8')
+      .trim().split('\n')
+      .map(line => JSON.parse(line));
+    res.json(entries);
+  } catch (error) {
+    console.error('Error listing saved entries:', error);
+    res.status(500).json({ message: 'Error listing saved entries.' });
+  }
+});
 
 app.get('/images/*', (req, res) => {
   const filePath = req.params[0].replace(/\\/g, '/'); // Ensure we use forward slashes
@@ -66,9 +88,14 @@ app.get('/list-animation-images', async (req, res) => {
 });
 
 // New route for animation generation
+// Assuming saveEntry function is defined as before
+// and saveFilePath is correctly set up
+
+// Modification of the /generate-animation endpoint to include saveEntry
 app.post('/generate-animation', async (req, res) => {
   try {
     const { btUrl, info } = await animation.generateAnimation(req.body);
+
     res.json({ bts: [btUrl], info });
   } catch (error) {
     console.error('Error:', error);
@@ -76,11 +103,13 @@ app.post('/generate-animation', async (req, res) => {
   }
 });
 
+
 // New route for image generation
 app.post('/generate-image', async (req, res) => {
   const outputDirForImages = path.join(baseDir, 'images');
   try {
     const { imageUrl, info } = await generateImage(outputDirForImages, req.body);
+
     res.json({ images: [imageUrl], info });
   } catch (error) {
     console.error('Error in generate-image route:', error);
