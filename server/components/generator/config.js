@@ -178,7 +178,7 @@ const getVideoConfigOriginal = () => {
 		"cn_1_overwrite_frames": true,
 		"cn_1_vid_path": "C:\\stable-diffusion\\stable-diffusion-webui-api\\uploads\\controlnet\\bt\\bt-circle-1.mp4",
 		"cn_1_mask_vid_path": "",
-		"cn_1_enabled": true,
+		"cn_1_enabled": false,
 		"cn_1_low_vram": false,
 		"cn_1_pixel_perfect": true,
 		"cn_1_module": "none",
