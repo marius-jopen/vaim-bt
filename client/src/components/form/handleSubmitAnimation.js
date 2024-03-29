@@ -15,6 +15,9 @@ const handleSubmitAnimation = async (
       "max_frames": parseInt(maxFrames, 10),
       "cn_1_enabled": cn1Enabled,
       "cn_1_vid_path": cn1Enabled ? cn1VidPath : undefined,
+      positivePromptsSave: positivePrompts,
+      lorasSave: loras,
+      promptsSave: formattedPrompts,
     }
   };
 

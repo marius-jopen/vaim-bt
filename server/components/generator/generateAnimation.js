@@ -47,10 +47,10 @@ class Generator {
 
        // After setting up your modifiedParameters but before the fetch call:
       const entryData = {
-        prompts: JSON.stringify(parameters.deforum_settings.prompts), // Assuming this structure; adjust as needed
-        positivePrompts: "Your logic to extract positive prompts",
-        negativePrompts: "Your logic to extract negative prompts",
-        loras: parameters.deforum_settings.loras || "default value",
+        prompts: parameters.deforum_settings.promptsSave || "default prompt",
+        positivePrompts: parameters.deforum_settings.positivePromptsSave || "default value",
+        negativePrompts: parameters.deforum_settings.negative_prompt || "default value",
+        loras: parameters.deforum_settings.lorasSave || "N/A",
         maxFrames: parameters.deforum_settings.max_frames || "default value",
         cn1Enabled: parameters.deforum_settings.cn_1_enabled || false,
         cn1VidPath: parameters.deforum_settings.cn_1_vid_path || "N/A",
