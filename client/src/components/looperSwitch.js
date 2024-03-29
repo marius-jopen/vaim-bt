@@ -10,32 +10,33 @@ function LooperSwitch() {
     setDisplayMode(mode);
   };
 
-  // Adjust the function to apply a different background color for the active mode
-  const getButtonClass = (mode) => 
-    `transition rounded-xl px-3 py-2 w-full text-xs ${displayMode === mode ? 'bg-gray-300' : 'bg-gray-200 hover:bg-gray-300'}`;
+  const isActive = (mode) => displayMode === mode ? 'bg-gray-100' : 'bg-white';
 
   return (
     <div className="looper-switch">
-      <div className='flex gap-4 mb-4'>
-        <button 
-          className={getButtonClass('full')}
-          onClick={() => handleDisplayModeChange('full')}
+      <span className="isolate inline-flex rounded-md shadow-sm  mb-4">
+        <button
+            onClick={() => handleDisplayModeChange('full')}
+          type="button"
+          className={`relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('full')}`}
         >
-          FULL
+          Full
         </button>
-        <button 
-          className={getButtonClass('latest')}
+        <button
           onClick={() => handleDisplayModeChange('latest')}
+          type="button"
+          className={`relative -ml-px inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('latest')}`}
         >
-          CURRENT
+          Current
         </button>
-        <button 
-          className={getButtonClass('image')}
+        <button
           onClick={() => handleDisplayModeChange('image')}
+          type="button"
+          className={`relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('image')}`}
         >
-          IMAGE
+          Images
         </button>
-      </div>
+      </span>
 
       {displayMode === 'full' && <LooperFull />}
       {displayMode === 'latest' && <LooperLatest />}
