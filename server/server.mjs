@@ -32,6 +32,29 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(baseDir, 'images')));
 
+
+app.get('/get-latest-settings', (req, res) => {
+  fs.readFile(saveFilePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading save file:', err);
+      return res.status(500).send('Error reading save file');
+    }
+    const entries = data.trim().split('\n');
+    const lastEntry = entries.pop();
+    if (!lastEntry) {
+      return res.json({
+        message: 'No saved settings found, using defaults.',
+        settings: null,
+      });
+    }
+    return res.json({
+      message: 'Latest settings loaded successfully.',
+      settings: JSON.parse(lastEntry),
+    });
+  });
+});
+
+
 app.get('/list-saved-entries', (req, res) => {
   try {
     const entries = fs.readFileSync(saveFilePath, 'utf8')

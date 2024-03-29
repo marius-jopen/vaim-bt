@@ -18,20 +18,31 @@ export default function Form() {
 
   useEffect(() => {
     const fetchSavedEntries = async () => {
-      const response = await fetch('http://localhost:4000/list-saved-entries');
-      const entries = await response.json();
-      if (entries.length > 0) {
-        const mostRecentEntry = entries[entries.length - 1];
-        // Update your state based on the most recent entry
-        // For example:
-        setPrompts(mostRecentEntry.prompts);
-        // Repeat for other fields...
+      try {
+        const response = await fetch('http://localhost:4000/get-latest-settings');
+        const { settings } = await response.json();
+        if (settings) {
+          // Assuming `settings` directly maps to your state structure; adjust as needed
+          setPrompts(settings.prompts);
+          setMaxFrames(settings.maxFrames);
+          setPositivePrompts(settings.positivePrompts);
+          setNegativePrompts(settings.negativePrompts);
+          setLoras(settings.loras);
+          setCn1Enabled(settings.cn1Enabled);
+          setManualFilePath(settings.cn1VidPath);
+        } else {
+          // If no settings were found, the default state values will be used.
+          console.log("Using default settings.");
+        }
+      } catch (error) {
+        console.error("Failed to fetch saved settings:", error);
       }
     };
-
+  
     fetchSavedEntries();
   }, []);
 
+  
   const handleAnimationSubmit = async (e) => {
     e.preventDefault();
     // Use manualFilePath in your submission logic
