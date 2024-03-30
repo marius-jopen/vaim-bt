@@ -35,9 +35,10 @@ const getVideoConfigModified = () => {
 	return {
 		"color_coherence": "LAB",
 		"strength": 0.7, // Init IMAGE strength, but it also influences the general strength
-		"strength_schedule": "0: (0.7)", // General strength
-		"diffusion_cadence": 3,
-		"optical_flow_cadence": "RAFT",
+		"strength_schedule": "0: (0.75)", // General strength
+		"diffusion_cadence": 4,
+		"optical_flow_cadence": "Farneback",
+		"optical_flow_redo_generation": "",
 		"animation_mode": "3D",
 		"translation_x": "0: (0)",
 		"translation_y": "0: (0)",
@@ -127,7 +128,6 @@ const getVideoConfigOriginal = () => {
 		"color_force_grayscale": false,
 		"legacy_colormatch": false,
 		"cadence_flow_factor_schedule": "0: (1)",
-		"optical_flow_redo_generation": "None",
 		"redo_flow_factor_schedule": "0: (1)",
 		"diffusion_redo": "0",
 		"noise_type": "perlin",
