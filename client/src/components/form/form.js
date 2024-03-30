@@ -4,6 +4,9 @@ import handleSubmitAnimation from './handleSubmitAnimation';
 import TextInput from './TextInput';
 import TextAreaInput from './TextAreaInput';
 import SubmitButton from './SubmitButton';
+import LooperSwitch from '../looperSwitch';
+import ControlNet from './ControlNet'; // Ensure path correctness
+import LoadSettings from './LoadSettings'; // Ensure path correctness
 
 export default function Form() {
   const [prompts, setPrompts] = useState('beautiful lady, (freckles), big smile, ruby eyes, short hair, dark makeup, head and shoulders portrait, cover');
@@ -15,46 +18,48 @@ export default function Form() {
   const [manualFilePath, setManualFilePath] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [savedEntries, setSavedEntries] = useState([]);
-  const [selectedEntryId, setSelectedEntryId] = useState('');
+  const [selectedEntry, setSelectedEntry] = useState(null); // Corrected to manage the entire selected entry object
 
   useEffect(() => {
     const fetchSavedEntries = async () => {
       try {
-        // Fetch the list of saved settings
         const response = await fetch('http://localhost:4000/list-saved-entries');
         const entries = await response.json();
         setSavedEntries(entries);
-
-        // Fetch the latest settings and apply them
         if (entries.length > 0) {
-          const mostRecentEntry = entries[entries.length - 1];
+          const mostRecentEntry = entries[0]; // Assuming entries are already sorted; adjust if necessary
+          setSelectedEntry(mostRecentEntry); // Directly set the most recent entry object
           applySettings(mostRecentEntry);
         }
       } catch (error) {
         console.error("Failed to fetch saved settings:", error);
       }
     };
-  
     fetchSavedEntries();
   }, []);
 
-  const applySettings = (settings) => {
-    setPrompts(settings.prompts);
-    setMaxFrames(settings.maxFrames);
-    setPositivePrompts(settings.positivePrompts);
-    setNegativePrompts(settings.negativePrompts);
-    setLoras(settings.loras);
-    setCn1Enabled(settings.cn1Enabled);
-    setManualFilePath(settings.cn1VidPath);
-  };
 
-  const handleSelectChange = (event) => {
-    const selectedId = event.target.value;
-    setSelectedEntryId(selectedId);
-    const selectedEntry = savedEntries.find(entry => entry.timestamp === selectedId);
-    if (selectedEntry) {
-      applySettings(selectedEntry);
+  const applySettings = (entry) => {
+    if (entry) {
+      setPrompts(entry.prompts || '');
+      setMaxFrames(entry.maxFrames || '100');
+      setPositivePrompts(entry.positivePrompts || '');
+      setNegativePrompts(entry.negativePrompts || '');
+      setLoras(entry.loras || '<lora:add-detail-xl:1>');
+      
+      // Check if entry.cn1Enabled is "N/A", undefined, or null, and set it to false; otherwise, use its actual value
+      setCn1Enabled(entry.cn1Enabled === "N/A" ? false : entry.cn1Enabled ?? false);
+  
+      // Only set manualFilePath if cn1Enabled is true
+      setManualFilePath(entry.cn1Enabled && entry.cn1Enabled !== "N/A" ? entry.cn1VidPath || '' : '');
     }
+  };
+  
+  
+  const handleSelectChange = (entry) => {
+    console.log('handleSelectChange called with:', entry);
+    applySettings(entry);
+    setSelectedEntry(entry); //
   };
 
   const handleAnimationSubmit = async (e) => {
@@ -70,47 +75,31 @@ export default function Form() {
 
   return (
     <>
-      <div className="order-2 lg:order-1">
-        <form onSubmit={handleAnimationSubmit} className='text-xs'>
-          <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
-          <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
-          <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
-          <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
-          <TextInput label="Max Frames" type="number" value={maxFrames} onChange={(e) => setMaxFrames(e.target.value)} required />     
-         
-          <button type="button" className="mb-4 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => setCn1Enabled(!cn1Enabled)}>
-            {cn1Enabled ? "Controlnet is On" : "Controlnet is Off"}
-          </button>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+            <LooperSwitch />
+            <LoadSettings
+              savedEntries={savedEntries}
+              selectedEntry={selectedEntry}
+              setSelectedEntry={handleSelectChange} // Ensure this matches the function name in Form
+            />
+          </div>
 
-          {cn1Enabled && (
-            <div className="mt-4">  
-              <TextInput
-                label="Video File Path"
-                type="text"
-                value={manualFilePath}
-                onChange={(e) => setManualFilePath(e.target.value)}
-                required
-                placeholder="Complete field to .mp4 video"
-              />
-            </div>
-          )}
+          <div>
+            <form onSubmit={handleImageSubmit} className='text-xs'>
+              <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
+            </form>
 
-
-          <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
-        </form>
-
-        <form onSubmit={handleImageSubmit} className='mt-4 text-xs'>
-          <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
-        </form>
-
-           {/* Dropdown to select a saved entry */}
-      <select onChange={handleSelectChange} value={selectedEntryId} className="mb-4">
-        {savedEntries.map(entry => (
-          <option key={entry.timestamp} value={entry.timestamp}>
-            {entry.prompts} - {new Date(entry.timestamp).toLocaleString()}
-          </option>
-        ))}
-      </select>
+            <form onSubmit={handleAnimationSubmit} className='text-xs'>
+              <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
+              <ControlNet cn1Enabled={cn1Enabled} setCn1Enabled={setCn1Enabled} manualFilePath={manualFilePath} setManualFilePath={setManualFilePath} />
+              <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
+              <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
+              <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
+              <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
+              <TextInput label="Max Frames" type="number" value={maxFrames} onChange={(e) => setMaxFrames(e.target.value)} required />     
+            </form>
+          </div>
       </div>
     </>
   );

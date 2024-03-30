@@ -43,7 +43,9 @@ function LooperLatest() {
       {images.length > 0 ? (
         <>
           <img src={currentImageUrl} alt="Gallery" className="cursor-pointer rounded-xl" onClick={togglePlayPause} />
-          <div className="text-xs text-gray-500 mt-2 mb-1">Path: {images[currentIndex]}</div>
+          <div className='h-16'>
+            <div className="text-xs text-gray-500 mt-2 mb-1">Path: {images[currentIndex]}</div>
+          </div>
         </>
       ) : (
         <div>No images found.</div>

@@ -35,27 +35,29 @@ function ImagesPreview() {
             alt="Slideshow"
             style={{ maxWidth: '100%', maxHeight: '90vh' }}
           />
-          <div className='flex justify-between'>
-            <div className="text-xs text-gray-500 mt-2 mb-1">Path:{`/images/${images[currentImageIndex]}`}</div>
-            <div className="flex justify-end gap-2 mt-2">
-              <span className="isolate inline-flex rounded-md shadow-sm">
-                <button
-                  onClick={handlePrevClick}
-                  type="button"
-                  className="relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-                >
-                  <span className="sr-only">Previous</span>
-                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                </button>
-                <button
-                  onClick={handleNextClick}
-                  type="button"
-                  className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-                >
-                  <span className="sr-only">Next</span>
-                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                </button>
-              </span>
+          <div className='h-16'>
+            <div className='flex justify-between'>
+              <div className="text-xs text-gray-500 mt-2 mb-1">Path:{`/images/${images[currentImageIndex]}`}</div>
+              <div className="flex justify-end gap-2 mt-2">
+                <span className="isolate inline-flex rounded-md shadow-sm">
+                  <button
+                    onClick={handlePrevClick}
+                    type="button"
+                    className="relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                  >
+                    <span className="sr-only">Previous</span>
+                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <button
+                    onClick={handleNextClick}
+                    type="button"
+                    className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                  >
+                    <span className="sr-only">Next</span>
+                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
         </>

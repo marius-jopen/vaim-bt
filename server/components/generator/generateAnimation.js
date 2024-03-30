@@ -50,10 +50,10 @@ class Generator {
         prompts: parameters.deforum_settings.promptsSave || "default prompt",
         positivePrompts: parameters.deforum_settings.positivePromptsSave || "default value",
         negativePrompts: parameters.deforum_settings.negative_prompt || "default value",
-        loras: parameters.deforum_settings.lorasSave || "N/A",
+        loras: parameters.deforum_settings.lorasSave || "default value",
         maxFrames: parameters.deforum_settings.max_frames || "default value",
         cn1Enabled: parameters.deforum_settings.cn_1_enabled || false,
-        cn1VidPath: parameters.deforum_settings.cn_1_vid_path || "N/A",
+        cn1VidPath: parameters.deforum_settings.cn_1_vid_path || "",
         // Add more fields as necessary
       };
 
