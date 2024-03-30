@@ -35,14 +35,14 @@ const getVideoConfigModified = () => {
 	return {
 		"color_coherence": "LAB",
 		"strength": 0.7, // Init IMAGE strength, but it also influences the general strength
-		"strength_schedule": "0: (0.75)", // General strength
+		"strength_schedule": "0: (0.7)", // General strength
 		"diffusion_cadence": 4,
 		"optical_flow_cadence": "Farneback",
-		"optical_flow_redo_generation": "",
+		"optical_flow_redo_generation": "None",
 		"animation_mode": "3D",
 		"translation_x": "0: (0)",
 		"translation_y": "0: (0)",
-		"translation_z": "0: (0.5)",
+		"translation_z": "0: (0.4)",
 		"transform_center_x": "0: (0.5)",
 		"transform_center_y": "0: (0.5)",
 		"rotation_3d_x": "0: (0)",
