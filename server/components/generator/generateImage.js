@@ -16,13 +16,13 @@ async function generateImage(outputDir, dynamicParameters) {
     };
 
     const entryData = {
-        prompts: dynamicParameters.promptsSave || "default prompt",
-        positivePrompts: dynamicParameters.positivePromptsSave || "default value",
-        negativePrompts: dynamicParameters.negative_prompt || "default value",
-        loras: dynamicParameters.lorasSave || "N/A",
-        maxFrames: dynamicParameters.maxframesSave || "N/A",
+        prompts: dynamicParameters.promptsSave || "",
+        positivePrompts: dynamicParameters.positivePromptsSave || "",
+        negativePrompts: dynamicParameters.negative_prompt || "",
+        loras: dynamicParameters.lorasSave || "",
+        maxFrames: dynamicParameters.maxframesSave || "",
         cn1Enabled: dynamicParameters.cn1EnabledSave || "N/A",
-        cn1VidPath: dynamicParameters.cn1VidPathSave || "N/A",
+        cn1VidPath: dynamicParameters.cn1VidPathSave || "",
       };
   
       // Save the structured entry data
