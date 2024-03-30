@@ -3,7 +3,7 @@ import Form from './components/form/form';
 
 function App() {
   return (
-    <div className="App px-4 pt-4 antialiased">
+    <div className="App px-4  antialiased">
       <Form />
     </div>
   );

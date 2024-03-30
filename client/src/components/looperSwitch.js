@@ -14,25 +14,25 @@ function LooperSwitch() {
 
   return (
     <div className="looper-switch">
-      <span className="isolate inline-flex rounded-md shadow-sm  mb-4">
+      <span className="flex rounded-md shadow-sm  mb-4">
         <button
             onClick={() => handleDisplayModeChange('full')}
           type="button"
-          className={`relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('full')}`}
+          className={`w-full relative  text-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('full')}`}
         >
           Full
         </button>
         <button
           onClick={() => handleDisplayModeChange('latest')}
           type="button"
-          className={`relative -ml-px inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('latest')}`}
+          className={`w-full relative -ml-px text-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('latest')}`}
         >
           Current
         </button>
         <button
           onClick={() => handleDisplayModeChange('image')}
           type="button"
-          className={`relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('image')}`}
+          className={`w-full relative -ml-px text-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('image')}`}
         >
           Images
         </button>

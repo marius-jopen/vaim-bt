@@ -52,6 +52,10 @@ const getVideoConfigModified = () => {
 		"fps": 15,
 		"cn_1_model": "qrpatternSdxl_v01256512eSdxl [49d72174]",
 		"cn_1_resize_mode": "Inner Fit (Scale to Fit)",
+		"frame_interpolation_engine": "RIFE v4.6",
+		"frame_interpolation_x_amount": 4,
+		"frame_interpolation_slow_mo_enabled": false,
+		"frame_interpolation_slow_mo_amount": 3,
 	};
 };
 
@@ -269,10 +273,6 @@ const getVideoConfigOriginal = () => {
 		"r_upscale_model": "realesr-animevideov3",
 		"r_upscale_keep_imgs": true,
 		"store_frames_in_ram": false,
-		"frame_interpolation_engine": "None",
-		"frame_interpolation_x_amount": 2,
-		"frame_interpolation_slow_mo_enabled": false,
-		"frame_interpolation_slow_mo_amount": 2,
 		"frame_interpolation_keep_imgs": true,
 		"frame_interpolation_use_upscaled": false,
 		"sd_model_name": "juggernautXL_v9Rundiffusionphoto2.safetensors",

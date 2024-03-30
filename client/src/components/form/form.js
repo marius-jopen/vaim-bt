@@ -27,7 +27,7 @@ export default function Form() {
         const entries = await response.json();
         setSavedEntries(entries);
         if (entries.length > 0) {
-          const mostRecentEntry = entries[0]; // Assuming entries are already sorted; adjust if necessary
+          const mostRecentEntry = entries[entries.length]; // Assuming entries are already sorted; adjust if necessary
           setSelectedEntry(mostRecentEntry); // Directly set the most recent entry object
           applySettings(mostRecentEntry);
         }
@@ -75,31 +75,42 @@ export default function Form() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div>
+        <div className='text-center text-4xl mt-2 mb-4 font-bold'>
+          vaAIm
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div>
             <LooperSwitch />
-            <LoadSettings
-              savedEntries={savedEntries}
-              selectedEntry={selectedEntry}
-              setSelectedEntry={handleSelectChange} // Ensure this matches the function name in Form
-            />
+            <div className='flex gap-4'>
+              {/* Move the form and submit button for generating video under LooperSwitch */}
+              <form onSubmit={handleAnimationSubmit} className='text-xs w-full'>
+                <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
+              </form>
+              <form onSubmit={handleImageSubmit} className='text-xs w-full'>
+                <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
+              </form>
+            </div>
           </div>
 
           <div>
-            <form onSubmit={handleImageSubmit} className='text-xs'>
-              <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
-            </form>
-
-            <form onSubmit={handleAnimationSubmit} className='text-xs'>
-              <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
-              <ControlNet cn1Enabled={cn1Enabled} setCn1Enabled={setCn1Enabled} manualFilePath={manualFilePath} setManualFilePath={setManualFilePath} />
-              <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
-              <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
-              <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
-              <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
-              <TextInput label="Max Frames" type="number" value={maxFrames} onChange={(e) => setMaxFrames(e.target.value)} required />     
-            </form>
+            {/* Only keep the inputs for animation settings here */}
+            <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
+            <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
+            <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
+            <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
+            <TextInput label="Max Frames" type="number" value={maxFrames} onChange={(e) => setMaxFrames(e.target.value)} required />     
+            <ControlNet cn1Enabled={cn1Enabled} setCn1Enabled={setCn1Enabled} manualFilePath={manualFilePath} setManualFilePath={setManualFilePath} />
           </div>
+        </div>
+
+        <div className='mb-8'>
+          <LoadSettings
+            savedEntries={savedEntries}
+            selectedEntry={selectedEntry}
+            setSelectedEntry={handleSelectChange} // Ensure this matches the function name in Form
+          />
+        </div>
       </div>
     </>
   );
