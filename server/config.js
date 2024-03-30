@@ -1,1 +1,1 @@
-export const basePath = 'E:/output/sd-api';
+export const basePath = 'E:/sd-output/vaim-bt';
