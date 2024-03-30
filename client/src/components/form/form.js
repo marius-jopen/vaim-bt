@@ -77,7 +77,7 @@ export default function Form() {
     <>
       <div>
         <div className='text-center text-4xl mt-2 mb-4 font-bold'>
-          vaAIm
+          vAIm
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
