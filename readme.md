@@ -58,3 +58,5 @@ To run it again, just write
 ```
 npm run start
 ```
+
+in the severfile config.js are the setting for stable diffusion if you want to change them
