@@ -16,6 +16,7 @@ const handleSubmitAnimation = async (
       "cn_1_enabled": cn1Enabled,
       "cn_1_vid_path": cn1Enabled ? cn1VidPath : undefined,
       positivePromptsSave: positivePrompts,
+      negativePromptsSave: negativePrompts,
       lorasSave: loras,
       promptsSave: formattedPrompts,
     }
