@@ -52,7 +52,7 @@ const getVideoConfigModified = () => {
 		"fps": 15,
 		"cn_1_model": "qrpatternSdxl_v01256512eSdxl [49d72174]",
 		"cn_1_resize_mode": "Inner Fit (Scale to Fit)",
-		"frame_interpolation_engine": "RIFE v4.6",
+		"frame_interpolation_engine": "None",
 		"frame_interpolation_x_amount": 4,
 		"frame_interpolation_slow_mo_enabled": false,
 		"frame_interpolation_slow_mo_amount": 3,
