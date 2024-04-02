@@ -13,6 +13,7 @@ save.txt
 /build
 
 # misc
+/server/.env
 .env
 .DS_Store
 .env.local
