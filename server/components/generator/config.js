@@ -1,8 +1,8 @@
 const baseConfig = {
 	seed: 1,
 	steps: 20,
-	width: 1024,
-	height: 1024,
+	width: 832,
+	height: 1216,
 	cfgScale: 5,
 	samplerName: "Euler a",
 };
