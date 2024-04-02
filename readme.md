@@ -60,3 +60,6 @@ npm run start
 ```
 
 in the severfile config.js are the setting for stable diffusion if you want to change them
+
+.env
+API_KEY=sk-7sjbsafjhasvfjhv5676bkFJW5Fokjbh76RN0h5f6H
