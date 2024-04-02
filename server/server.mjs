@@ -8,30 +8,39 @@ import generateAnimation from './components/generator/generateAnimation.js';
 import LooperFull from './components/looperFull.js';
 import LooperLatest from './components/looperLatest.js';
 import generateImage from './components/generator/generateImage.js';
-
+import bodyParser from 'body-parser';
+import { generatePoem } from './components/chatgpt/PoemGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const saveFilePath = path.join(__dirname, 'save.txt'); // Path for save.txt in the root
-
-
-
 const app = express();
 const port = 4000;
-
-// Using basePath from your config.js. Make sure it's the intended path
 const baseDir = path.join(basePath.replace(/\\/g, '/'));
-
-// Initialize your components with baseDir if necessary
 const animation = new generateAnimation(baseDir);
 const looperFull = new LooperFull(baseDir);
 const looperLatest = new LooperLatest(baseDir);
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(baseDir, 'images')));
 
+
+
+
+app.post('/generate-poem', async (req, res) => {
+  const { sentence } = req.body; // Get the sentence from the request body
+  try {
+    const poem = await generatePoem(sentence);
+    res.json({ success: true, poem });
+  } catch (error) {
+    console.error('Error generating poem:', error);
+    res.status(500).json({ success: false, message: 'Error generating poem' });
+  }
+});
 
 app.get('/get-latest-settings', (req, res) => {
   fs.readFile(saveFilePath, 'utf8', (err, data) => {
@@ -64,18 +73,6 @@ app.get('/list-saved-entries', (req, res) => {
   }
 });
 
-// app.get('/list-saved-entries', (req, res) => {
-//   try {
-//     const entries = fs.readFileSync(saveFilePath, 'utf8')
-//       .trim().split('\n')
-//       .map(line => JSON.parse(line));
-//     res.json(entries);
-//   } catch (error) {
-//     console.error('Error listing saved entries:', error);
-//     res.status(500).json({ message: 'Error listing saved entries.' });
-//   }
-// });
-
 app.get('/images/*', (req, res) => {
   const filePath = req.params[0].replace(/\\/g, '/'); // Ensure we use forward slashes
   const absolutePath = path.join(baseDir, filePath);
@@ -97,7 +94,6 @@ app.get('/list-preview-images', async (req, res) => {
   }
 });
 
-// New route for listing images from the latest folder
 app.get('/list-latest-animation-images', async (req, res) => {
   try {
     const images = await looperLatest.findPngImagesInLatestFolder();
@@ -108,7 +104,6 @@ app.get('/list-latest-animation-images', async (req, res) => {
   }
 });
 
-// Add a new route to serve the images
 app.get('/list-animation-images', async (req, res) => {
   try {
     const images = await looperFull.findAllPngImages();
@@ -119,11 +114,6 @@ app.get('/list-animation-images', async (req, res) => {
   }
 });
 
-// New route for animation generation
-// Assuming saveEntry function is defined as before
-// and saveFilePath is correctly set up
-
-// Modification of the /generate-animation endpoint to include saveEntry
 app.post('/generate-animation', async (req, res) => {
   try {
     const { btUrl, info } = await animation.generateAnimation(req.body);
@@ -135,8 +125,6 @@ app.post('/generate-animation', async (req, res) => {
   }
 });
 
-
-// New route for image generation
 app.post('/generate-image', async (req, res) => {
   const outputDirForImages = path.join(baseDir, 'images');
   try {

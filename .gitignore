@@ -1,6 +1,5 @@
-server/save.txt
+save.txt
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-server/.env
 
 # dependencies
 /node_modules
@@ -14,6 +13,7 @@ server/.env
 /build
 
 # misc
+server/.env
 /server/.env
 .env
 /.env
@@ -22,9 +22,3 @@ server/.env
 .env.development.local
 .env.test.local
 .env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-server/.env
