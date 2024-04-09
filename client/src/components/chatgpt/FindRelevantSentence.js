@@ -9,6 +9,19 @@ const FindRelevantSentence = () => {
   const [loading, setLoading] = useState(false);
   const { setPrompts } = usePrompts();
 
+  const parsePoemData = (poemString) => {
+    const keys = ['Speech', 'Source', 'Prompts']; // Define keys to look for
+    const regex = new RegExp(keys.join(':|') + ':', 'g'); // Create regex to match keys with trailing colon
+    let parts = poemString.split(regex).slice(1); // Split by keys and remove the first empty result if any
+    let result = {};
+    
+    keys.forEach((key, index) => {
+      result[key.toLowerCase()] = parts[index]?.trim() ?? '';
+    });
+  
+    return result;
+  };
+  
   const generatePoem = async (event) => {
     event.preventDefault(); // Prevent the default form behavior
     setLoading(true);
@@ -23,21 +36,16 @@ const FindRelevantSentence = () => {
   
       const data = await response.json();
       if (data.success) {
-        // Use a more defensive approach to handle the data
-        const parts = data.poem.split('\n').reduce((acc, current) => {
-          const [key, value] = current.split(':').map(part => part?.trim()); // Trim parts safely
-          if (key && value !== undefined) { // Check for undefined explicitly
-            acc[key.toLowerCase()] = value;
-          }
-          return acc;
-        }, {});
+        console.log(data.poem);
+        // Use the new parsing function
+        const parts = parsePoemData(data.poem);
   
         setPoem({
-          speech: parts.speech ?? '', // Use nullish coalescing to handle undefined
-          source: parts.source ?? '',
-          prompts: parts.prompts ?? '',
+          speech: parts.speech,
+          source: parts.source,
+          prompts: parts.prompts,
         });
-        setPrompts(parts.prompts ?? ''); // Safely update prompts
+        setPrompts(parts.prompts); // Safely update prompts
       } else {
         alert('Failed to generate poem: ' + data.message);
       }
@@ -49,22 +57,23 @@ const FindRelevantSentence = () => {
     }
   };
   
+  
   return (
     <form onSubmit={generatePoem}>
+      <SubmitButton
+        text={loading ? "Generating..." : "Generate Thoughts"}
+        colorClass="bg-orange-400 hover:bg-orange-500"
+        disabled={loading}
+      />
       <TextAreaInput
         label="Enter a sentence"
         value={sentence}
         onChange={(e) => setSentence(e.target.value)}
       />
-      <SubmitButton
-        text={loading ? "Generating..." : "Search"}
-        colorClass="bg-orange-400 hover:bg-orange-500"
-        disabled={loading}
-      />
-      <div>
-        <div><strong>Speech:</strong> {poem.speech}</div>
-        <div><strong>Source:</strong> {poem.source}</div>
-        <div><strong>Prompts:</strong> {poem.prompts}</div>
+      <div className='bg-neutral-100 py-3 px-5 rounded-lg border border-neutral-200 text-sm mb-6'>
+        <div><span className='font-medium'>Speech:</span> {poem.speech}</div>
+        <div><span className='font-medium'>Source:</span> {poem.source}</div>
+        <div><span className='font-medium'>Prompts:</span> {poem.prompts}</div>
       </div>
     </form>
   );
