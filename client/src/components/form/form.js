@@ -23,6 +23,8 @@ export default function Form() {
   const [selectedEntry, setSelectedEntry] = useState(null); // Corrected to manage the entire selected entry object
   const { prompts, setPrompts } = usePrompts();
 
+  console.log(prompts)
+
   useEffect(() => {
     const fetchSavedEntries = async () => {
       try {
