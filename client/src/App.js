@@ -1,6 +1,6 @@
-import Form from './components/form/form';
 import React, { useEffect } from 'react';
-import PoemGenerator from './components/chatgpt/PoemGenerator';
+import { PromptsProvider } from './components/promptsContext'; // Adjust the import path as necessary
+import Form from './components/form/form';
 
 function App() {
   useEffect(() => {
@@ -8,10 +8,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App px-4  antialiased">
-      <PoemGenerator /> 
-      <Form />
-    </div>
+    <PromptsProvider>
+      <div className="App px-4 antialiased">
+        <Form />
+      </div>
+    </PromptsProvider>
   );
 }
 

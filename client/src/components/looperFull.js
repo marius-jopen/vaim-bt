@@ -38,7 +38,7 @@ function LooperFull() {
       {images.length > 0 ? (
         <>
           <img className='cursor-pointer rounded-xl' src={currentImageUrl} alt="Gallery" onClick={togglePlayPause} />
-          <div className='h-16'>
+          <div className='h-12'>
             <div className="text-xs text-gray-500 mt-2 mb-1">Path: {images[currentIndex]}</div>
           </div>
         </>

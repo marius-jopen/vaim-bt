@@ -1,6 +1,9 @@
 const TextAreaInput = ({ label, value, onChange }) => (
   <div className="mb-4">
-    <div className="mb-0.5">
+    <label htmlFor={label} className="block text-sm font-medium leading-6 text-gray-900">
+      {label}
+    </label>
+    <div className="mt-0.5">
       <textarea
         rows={4}
         name={label}
@@ -10,9 +13,6 @@ const TextAreaInput = ({ label, value, onChange }) => (
         defaultValue={''}
       />
     </div>
-    <label htmlFor={label} className="block text-sm font-medium leading-6 text-gray-900">
-      {label}
-    </label>
   </div>
   );
   

@@ -10,6 +10,7 @@ import LooperLatest from './components/looperLatest.js';
 import generateImage from './components/generator/generateImage.js';
 import bodyParser from 'body-parser';
 import { generatePoem } from './components/chatgpt/PoemGenerator.js';
+import { findRelevantSentence } from './components/chatgpt/FindRelevantSentence.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,8 +29,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(baseDir, 'images')));
 
-
-
+app.post('/search-sentence', async (req, res) => {
+  const { sentence } = req.body; // Get the sentence from the request body
+  try {
+    const poem = await findRelevantSentence(sentence);
+    res.json({ success: true, poem });
+  } catch (error) {
+    console.error('Error generating poem:', error);
+    res.status(500).json({ success: false, message: 'Error generating poem' });
+  }
+});
 
 app.post('/generate-poem', async (req, res) => {
   const { sentence } = req.body; // Get the sentence from the request body

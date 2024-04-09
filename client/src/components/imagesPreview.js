@@ -35,7 +35,7 @@ function ImagesPreview() {
             alt="Slideshow"
             style={{ maxWidth: '100%', maxHeight: '90vh' }}
           />
-          <div className='h-16'>
+          <div className='h-12'>
             <div className='flex justify-between'>
               <div className="text-xs text-gray-500 mt-2 mb-1">Path:{`/images/${images[currentImageIndex]}`}</div>
               <div className="flex justify-end gap-2 mt-2">

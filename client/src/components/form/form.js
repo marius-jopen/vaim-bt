@@ -7,9 +7,11 @@ import SubmitButton from './SubmitButton';
 import LooperSwitch from '../looperSwitch';
 import ControlNet from './ControlNet'; // Ensure path correctness
 import LoadSettings from './LoadSettings'; // Ensure path correctness
+import FindRelevantSentence from '../chatgpt/FindRelevantSentence';
+import { usePrompts } from '../promptsContext'; // Adjust the path as necessary
 
 export default function Form() {
-  const [prompts, setPrompts] = useState('beautiful lady, (freckles), big smile, ruby eyes, short hair, dark makeup, head and shoulders portrait, cover');
+  // const [prompts, setPrompts] = useState('beautiful lady, (freckles), big smile, ruby eyes, short hair, dark makeup, head and shoulders portrait, cover');
   const [maxFrames, setMaxFrames] = useState('100');
   const [positivePrompts, setPositivePrompts] = useState('hyperdetailed photography, soft light, masterpiece, (film grain:1.3), (complex:1.2), (depth of field:1.4), detailed');
   const [negativePrompts, setNegativePrompts] = useState('grayscale, bw, bad photo, bad photography, bad art:1.4), (watermark, signature, text font, username, error, logo, words, letters, digits, autograph, trademark, name:1.2), (bad hands, bad anatomy, bad body, bad face, bad teeth, bad arms, bad legs, deformities:1.3), morbid, ugly, mutated malformed, mutilated, poorly lit, bad shadow, draft, cropped, out of frame, cut off, censored, jpeg artifacts, glitch, duplicate');
@@ -19,6 +21,7 @@ export default function Form() {
   const [responseMessage, setResponseMessage] = useState('');
   const [savedEntries, setSavedEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null); // Corrected to manage the entire selected entry object
+  const { prompts, setPrompts } = usePrompts();
 
   useEffect(() => {
     const fetchSavedEntries = async () => {
@@ -79,22 +82,23 @@ export default function Form() {
         <div className='text-center text-4xl mt-2 mb-4 font-bold'>
           vAIm
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <LooperSwitch />
-            <div className='flex gap-4'>
-              {/* Move the form and submit button for generating video under LooperSwitch */}
-              <form onSubmit={handleAnimationSubmit} className='text-xs w-full'>
-                <SubmitButton text="Generate Video" colorClass="bg-green-200 hover:bg-green-300" />
-              </form>
-              <form onSubmit={handleImageSubmit} className='text-xs w-full'>
-                <SubmitButton text="Generate Image" colorClass="bg-blue-200 hover:bg-blue-300" />
-              </form>
-            </div>
+            <FindRelevantSentence setPrompts={setPrompts} />
           </div>
 
           <div>
-            {/* Only keep the inputs for animation settings here */}
+            <div className='flex gap-4'>
+              <form onSubmit={handleAnimationSubmit} className='text-xs w-full'>
+                <SubmitButton text="Generate Video" colorClass="bg-green-400 hover:bg-green-500" />
+              </form>
+              <form onSubmit={handleImageSubmit} className='text-xs w-full'>
+                <SubmitButton text="Generate Image" colorClass="bg-blue-400 hover:bg-blue-500" />
+              </form>
+            </div>
+
             <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
             <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
             <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
