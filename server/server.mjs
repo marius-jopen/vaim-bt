@@ -91,15 +91,21 @@ app.get('/list-preview-images', async (req, res) => {
   }
 });
 
-app.get('/list-latest-animation-images', async (req, res) => {
+app.get('/list-latest-animation', async (req, res) => {
   try {
-    const images = await looperLatest.findPngImagesInLatestFolder();
-    res.json(images);
+    const data = await looperLatest.findPngImagesInLatestFolder(); // Ensure this method logs output
+    if (!data.images.length || !data.soundtrack) {
+      console.log("No images or soundtrack found.");
+      res.status(404).json({ message: 'No images or soundtrack found.' });
+      return;
+    }
+    res.json(data);
   } catch (error) {
-    console.error('Error listing images from the latest folder:', error);
-    res.status(500).json({ message: 'Error listing images from the latest folder.' });
+    console.error('Error listing images and soundtrack from the latest folder:', error);
+    res.status(500).json({ message: 'Error listing images and soundtrack from the latest folder.' });
   }
 });
+
 
 app.get('/list-animation-images', async (req, res) => {
   try {

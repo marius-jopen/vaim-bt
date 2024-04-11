@@ -2,33 +2,36 @@ import React, { useState, useEffect } from 'react';
 
 function LooperLatest() {
   const [images, setImages] = useState([]);
+  const [soundtrackInfo, setSoundtrackInfo] = useState(''); // Renamed to reflect that it's just information
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true); // State to control playback
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchImagesAndSoundtrack = async () => {
       try {
-        const response = await fetch('http://localhost:4000/list-latest-animation-images');
+        // Update the fetch URL to match the new endpoint
+        const response = await fetch('http://localhost:4000/list-latest-animation');
         const data = await response.json();
 
-        if (data && data.length > 0) {
-          setImages(data);
+        if (data && data.images && data.images.length > 0) {
+          setImages(data.images);
+          setSoundtrackInfo(data.soundtrack); // Set the soundtrack info
         } else {
-          console.log("No images found in the latest folder.");
+          console.log("No images or soundtrack found in the latest folder.");
         }
       } catch (error) {
-        console.error("Failed to load images", error);
+        console.error("Failed to load images and soundtrack info", error);
       }
     };
 
-    fetchImages();
+    fetchImagesAndSoundtrack();
   }, []);
 
   useEffect(() => {
     if (images.length > 0 && isPlaying) {
       const interval = setInterval(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
-      }, 1000 / 15);
+      }, 1000 / 15); // For example, 15 frames per second
 
       return () => clearInterval(interval);
     }
@@ -42,9 +45,14 @@ function LooperLatest() {
     <div className="looper-latest">
       {images.length > 0 ? (
         <>
+        <div className='relative'>
+          {soundtrackInfo && (
+            <div className="absolute bottom-8 w-full text-center text-3xl text-yellow-400 font-bold px-8">Speech: {soundtrackInfo}</div>
+          )}
           <img src={currentImageUrl} alt="Gallery" className="cursor-pointer rounded-xl" onClick={togglePlayPause} />
+        </div>
           <div className='h-12'>
-            <div className="text-xs text-gray-500 mt-2 mb-1">Path: {images[currentIndex]}</div>
+            <div className="text-xs text-gray-500 mt-2 mb-1">Image Path: {images[currentIndex]}</div>
           </div>
         </>
       ) : (
