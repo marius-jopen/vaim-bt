@@ -1,3 +1,12 @@
+// const baseConfig = {
+// 	seed: 1,
+// 	steps: 4,
+// 	width: 832,
+// 	height: 1216,
+// 	cfgScale: 3,
+// 	samplerName: "DPM++ SDE",
+// };
+
 const baseConfig = {
 	seed: 1,
 	steps: 20,
@@ -56,6 +65,7 @@ const getVideoConfigModified = () => {
 		"frame_interpolation_x_amount": 4,
 		"frame_interpolation_slow_mo_enabled": false,
 		"frame_interpolation_slow_mo_amount": 3,
+		// "soundtrack_path": "https://deforum.github.io/a1/A1.mp3",
 	};
 };
 
@@ -267,7 +277,6 @@ const getVideoConfigOriginal = () => {
 		"delete_imgs": false,
 		"delete_input_frames": false,
 		"add_soundtrack": "None",
-		"soundtrack_path": "https://deforum.github.io/a1/A1.mp3",
 		"r_upscale_video": false,
 		"r_upscale_factor": "x2",
 		"r_upscale_model": "realesr-animevideov3",

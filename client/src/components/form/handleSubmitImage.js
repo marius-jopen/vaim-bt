@@ -2,8 +2,9 @@ const handleSubmitImage = async (
   e, { prompts, positivePrompts, loras, negativePrompts, maxFrames,cn1VidPath,cn1Enabled }, setResponseMessage
 ) => {
   e.preventDefault();
+  const mainPromptText = prompts.prompts || ""; // Access the 'prompts' string from the prompts object
 
-  const formattedPrompts = prompts.replace(/\n/g, ' ');
+  const formattedPrompts = mainPromptText.replace(/\n/g, ' ');
 
   const parameters = {
     prompt: `${formattedPrompts} ${positivePrompts} ${loras}`,

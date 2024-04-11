@@ -50,6 +50,7 @@ class Generator {
         maxFrames: parameters.deforum_settings.max_frames || "", // Save the maximum number of frames.
         cn1Enabled: parameters.deforum_settings.cn_1_enabled || false, // Save whether CN1 is enabled.
         cn1VidPath: parameters.deforum_settings.cn_1_vid_path || "", // Save the CN1 video path.
+        soundtrack_path: parameters.deforum_settings.soundtrack_path || "", // Save the soundtrack path.
         // Add more fields as necessary
       };
 

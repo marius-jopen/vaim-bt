@@ -39,13 +39,13 @@ const FindRelevantSentence = () => {
         console.log(data.poem);
         // Use the new parsing function
         const parts = parsePoemData(data.poem);
-  
+
         setPoem({
           speech: parts.speech,
           source: parts.source,
           prompts: parts.prompts,
         });
-        setPrompts(parts.prompts); // Safely update prompts
+        setPrompts(parts); // Safely update prompts
       } else {
         alert('Failed to generate poem: ' + data.message);
       }

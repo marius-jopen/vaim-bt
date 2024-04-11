@@ -46,7 +46,7 @@ export default function Form() {
 
   const applySettings = (entry) => {
     if (entry) {
-      setPrompts(entry.prompts || '');
+      setPrompts(entry.prompts.prompts || '');
       setMaxFrames(entry.maxFrames || '100');
       setPositivePrompts(entry.positivePrompts || '');
       setNegativePrompts(entry.negativePrompts || '');
@@ -101,7 +101,7 @@ export default function Form() {
               </form>
             </div>
 
-            <TextAreaInput label="Prompts" value={prompts} onChange={(e) => setPrompts(e.target.value)} />
+            <TextAreaInput label="Prompts" value={prompts.prompts} onChange={(e) => setPrompts(e.target.value)} />
             <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
             <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
             <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
