@@ -36,7 +36,7 @@ const FindRelevantSentence = () => {
   
       const data = await response.json();
       if (data.success) {
-        console.log(data.poem);
+        // console.log(data.poem);
         // Use the new parsing function
         const parts = parsePoemData(data.poem);
 

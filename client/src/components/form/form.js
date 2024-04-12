@@ -61,7 +61,7 @@ export default function Form() {
   
   
   const handleSelectChange = (entry) => {
-    console.log('handleSelectChange called with:', entry);
+    // console.log('handleSelectChange called with:', entry);
     applySettings(entry);
     setSelectedEntry(entry); //
   };

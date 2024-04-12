@@ -14,7 +14,7 @@ async function generateImage(outputDir, dynamicParameters) {
         ...dynamicParameters,
         ...imageConfig,
     };
-    console.log(parameters)
+    // console.log(parameters)
     const entryData = {
         prompts: dynamicParameters.promptsSave || "",
         positivePrompts: dynamicParameters.positivePromptsSave || "",

@@ -6,7 +6,7 @@ const handleSubmitImage = async (
 
   const formattedPrompts = mainPromptText.replace(/\n/g, ' ');
 
-  console.log(formattedPrompts)
+  // console.log(formattedPrompts)
   
   const parameters = {
     prompt: `${formattedPrompts} ${positivePrompts} ${loras}`,
