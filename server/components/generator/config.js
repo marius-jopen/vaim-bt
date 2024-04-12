@@ -54,9 +54,6 @@ const getVideoConfigModified = () => {
 		"translation_z": "0: (0.4)",
 		"transform_center_x": "0: (0.5)",
 		"transform_center_y": "0: (0.5)",
-		"rotation_3d_x": "0: (0)",
-		"rotation_3d_y": "0: (0)",
-		"rotation_3d_z": "0: (0)",
 		"fov_schedule": "0: (70)",
 		"fps": 15,
 		"cn_1_model": "qrpatternSdxl_v01256512eSdxl [49d72174]",
@@ -65,7 +62,6 @@ const getVideoConfigModified = () => {
 		"frame_interpolation_x_amount": 4,
 		"frame_interpolation_slow_mo_enabled": false,
 		"frame_interpolation_slow_mo_amount": 3,
-		// "soundtrack_path": "https://deforum.github.io/a1/A1.mp3",
 	};
 };
 
