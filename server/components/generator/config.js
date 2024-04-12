@@ -7,13 +7,22 @@
 // 	samplerName: "DPM++ SDE",
 // };
 
+// const baseConfig = {
+// 	seed: 1,
+// 	steps: 20,
+// 	width: 832,
+// 	height: 1216,
+// 	cfgScale: 5,
+// 	samplerName: "DPM++ 3M SDE",
+// };
+
 const baseConfig = {
 	seed: 1,
 	steps: 20,
-	width: 832,
-	height: 1216,
+	width: 1216,
+	height: 832,
 	cfgScale: 5,
-	samplerName: "Euler a",
+	samplerName: "DPM++ 3M SDE",
 };
 
 const getImageConfig = () => {

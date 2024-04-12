@@ -20,31 +20,7 @@ const findRelevantSentence = async (sentence) => {
           {role: "user", content: `
           This is the user input: ${sentence}. 
           
-          That my system recognizes the difference bewteen the speech and the Stable Diffusion prompts, I want it in this format:
-          Speech:
-          Source:
-          Prompts:
-
-          Take a famous political speech and output a sentence that is relevant to the user input. 
-          Only use positive speeches. 
-          Nothing which includes hate or popularism.
-          Maximum two sentences long. 
-          There you can write the source.
-          Also no need for quotation marks.
-          Translate to German. Dont show the english text at all.
-          Don't invent anything, only use existing speeches.
-          Dont write explanations or other things. Make sure that you only write the speech and the source.
-          I saw that you sometimes added the source in brackets behind the speech. And then you also added it as source. 
-          Stick to the format I gave you.
-
-          Then I also need a string of prompts in english language which are relevant to the user input.
-          Those prompts for Stable DIffusion have to be in english!!
-          Don't be abstract. Name objects or things, because Stabel Diffusion can then generate them.
-          Stable Diffusion will generate an image out of this.
-          Maybe make a mix of the user input and the speech.
-          But keep it short and simple.
-          Consider, that Stable Diffusion needs to generate an image from that.
-          Also dont include the speaker or something from the captions in the prompts.
+          The GPT is part of an art installation at the Deutsche Bundestag. It interacts with users who provide a sentence or thought, and responds in two specific ways: 1. It selects an existing sentence from a famous positive political speech that is relevant to the user's input, translates it into German, and presents it under the label 'Speech:'. It then cites the source under the label 'Source:'. The speech selection should avoid hate, populism, right-wing politics, and discriminatory content against any group, especially women and people of color. Speeches from individuals or parties known for such views will not be used. It is crucial that the sentences are real and verifiable, not invented. 2. It generates a single-word art prompt suitable for creating images with Stable Diffusion, presented under the label 'Prompts:', based on the user's input mixed with the speech content. The prompt should be a direct, single word naming a tangible object, and should not include abstract concepts, mention the speaker, or include any populistic, right-wing symbols, sexual content, nudity, or national symbols such as flags or national colors. The speech output is always in German, and the art prompt is always in English.
 
           `}
         ],
