@@ -23,8 +23,6 @@ export default function Form() {
   const [selectedEntry, setSelectedEntry] = useState(null); // Corrected to manage the entire selected entry object
   const { prompts, setPrompts } = usePrompts();
 
-  console.log(prompts)
-
   useEffect(() => {
     const fetchSavedEntries = async () => {
       try {
@@ -100,8 +98,8 @@ export default function Form() {
                 <SubmitButton text="Generate Image" colorClass="bg-blue-400 hover:bg-blue-500" />
               </form>
             </div>
-
-            <TextAreaInput label="Prompts" value={prompts.prompts} onChange={(e) => setPrompts(e.target.value)} />
+            
+            <TextAreaInput label="Prompts" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
             <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
             <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
             <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />
