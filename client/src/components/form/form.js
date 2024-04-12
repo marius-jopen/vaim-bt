@@ -22,6 +22,7 @@ export default function Form() {
   const [savedEntries, setSavedEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null); // Corrected to manage the entire selected entry object
   const { prompts, setPrompts } = usePrompts();
+  const [caption, setCaption] = useState(''); // New state for caption
 
   useEffect(() => {
     const fetchSavedEntries = async () => {
@@ -68,7 +69,7 @@ export default function Form() {
   const handleAnimationSubmit = async (e) => {
     e.preventDefault();
     // Use manualFilePath in your submission logic
-    await handleSubmitAnimation(e, { prompts, maxFrames, positivePrompts, loras, negativePrompts, cn1Enabled, cn1VidPath: manualFilePath }, setResponseMessage);
+    await handleSubmitAnimation(e, { caption, prompts, maxFrames, positivePrompts, loras, negativePrompts, cn1Enabled, cn1VidPath: manualFilePath }, setResponseMessage);
   };
 
   const handleImageSubmit = async (e) => {
@@ -76,6 +77,7 @@ export default function Form() {
     await handleSubmitImage(e, { prompts, positivePrompts, loras, negativePrompts, cn1Enabled, cn1VidPath: manualFilePath,maxFrames }, setResponseMessage);
   };
 
+  
   return (
     <>
       <div>
@@ -98,7 +100,7 @@ export default function Form() {
                 <SubmitButton text="Generate Image" colorClass="bg-blue-400 hover:bg-blue-500" />
               </form>
             </div>
-            
+            {/* <TextAreaInput label="Caption" value={caption} onChange={(e) => setCaption(e.target.value)} /> */}
             <TextAreaInput label="Prompts" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
             <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
             <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />

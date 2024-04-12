@@ -41,7 +41,7 @@ const handleSubmitAnimation = async (
       "rotation_3d_x": "0: (" + rotation_3d_x / 2 + ")",
       "rotation_3d_y": "0: (" + rotation_3d_y / 2 + ")",
       "rotation_3d_z": "0: (" + rotation_3d_z / 2 + ")",
-      "soundtrack_path": speech || "",
+      "soundtrack_path": speech || " ",
       positivePromptsSave: positivePrompts,
       negativePromptsSave: negativePrompts,
       lorasSave: loras,
