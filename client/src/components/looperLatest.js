@@ -47,7 +47,7 @@ function LooperLatest() {
         <>
         <div className='relative'>
           {soundtrackInfo && (
-            <div className="absolute bottom-8 w-full text-center text-3xl text-yellow-400 font-bold px-8">Speech: {soundtrackInfo}</div>
+            <div className="caption absolute bottom-8 w-full text-center text-3xl font-bold px-8">{soundtrackInfo}</div>
           )}
           <img src={currentImageUrl} alt="Gallery" className="cursor-pointer rounded-xl" onClick={togglePlayPause} />
         </div>

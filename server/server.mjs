@@ -109,13 +109,15 @@ app.get('/list-latest-animation', async (req, res) => {
 
 app.get('/list-animation-images', async (req, res) => {
   try {
-    const images = await looperFull.findAllPngImages();
+    const images = await looperFull.findAllPngImagesAndSoundtracks();  // Ensure method name matches the Looper class method
     res.json(images);
   } catch (error) {
     console.error('Error listing animation images:', error);
     res.status(500).json({ message: 'Error listing animation images.' });
   }
 });
+
+
 
 app.post('/generate-animation', async (req, res) => {
   try {

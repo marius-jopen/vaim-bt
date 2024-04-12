@@ -3,38 +3,52 @@ import path from 'path';
 
 class Looper {
   constructor(baseDir) {
-    this.baseDir = baseDir; // Base directory containing the BT_XXXX folders
+    this.baseDir = baseDir;
   }
 
-  async findAllPngImages() {
+  async findAllPngImagesAndSoundtracks() {
     let directories = await fs.promises.readdir(this.baseDir, { withFileTypes: true });
-    directories = directories
-      .filter(dir => dir.isDirectory() && dir.name.startsWith('BT_'))
-      .map(dir => dir.name)
-      .sort();
+    directories = directories.filter(dir => dir.isDirectory() && dir.name.startsWith('BT_')).sort();
 
     if (directories.length === 0) {
-      return []; // Return an empty array if no directories are found
+      return [];
     }
 
-    let images = [];
+    let folderData = [];
     for (const dir of directories) {
-      const dirPath = path.join(this.baseDir, dir);
+      const dirPath = path.join(this.baseDir, dir.name); // Use dir.name to get the string name of the directory
       const files = await this.readDirForPngFiles(dirPath);
-      // Convert each absolute file path to a relative path from `this.baseDir`
-      const relativeFiles = files.map(file => path.relative(this.baseDir, file));
-      images = images.concat(relativeFiles);
+      const soundtrackPath = await this.getSoundtrackPath(dirPath);
+      const relativeFiles = files.map(file => ({
+        image: path.relative(this.baseDir, file),
+        soundtrack: soundtrackPath
+      }));
+      folderData.push(...relativeFiles);
     }
-    return images;
+    return folderData;
   }
 
   async readDirForPngFiles(dir) {
     let files = await fs.promises.readdir(dir, { withFileTypes: true });
-    files = files.filter(file => !file.isDirectory() && file.name.endsWith('.png'))
-      .map(file => file.name)
-      .sort();
-    // Convert file names to full paths
-    return files.map(file => path.join(dir, file));
+    files = files.filter(file => file.isFile() && file.name.endsWith('.png'))
+      .map(file => path.join(dir, file.name)); // Ensure to use file.name
+    return files;
+  }
+
+  async getSoundtrackPath(dir) {
+    try {
+      const files = await fs.promises.readdir(dir, { withFileTypes: true });
+      const txtFile = files.find(file => file.isFile() && file.name.endsWith('.txt'));
+      if (!txtFile) return null;
+
+      const txtFilePath = path.join(dir, txtFile.name); // Again, ensure to use txtFile.name
+      const data = await fs.promises.readFile(txtFilePath, 'utf8');
+      const json = JSON.parse(data);
+      return json.soundtrack_path || null;
+    } catch (error) {
+      console.error('Error reading soundtrack path:', error);
+      return null;
+    }
   }
 }
 
