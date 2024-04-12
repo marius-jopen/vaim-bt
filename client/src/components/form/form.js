@@ -101,7 +101,7 @@ export default function Form() {
               </form>
             </div>
             {/* <TextAreaInput label="Caption" value={caption} onChange={(e) => setCaption(e.target.value)} /> */}
-            <TextAreaInput label="Prompts" value={`(A clean render of a ${prompts.prompts} :3)`} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
+            <TextAreaInput label="Prompts" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
             <TextAreaInput label="Positive Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
             <TextAreaInput label="Negative Prompts" value={negativePrompts} onChange={(e) => setNegativePrompts(e.target.value)} />
             <TextAreaInput label="Loras / Textembeds" value={loras} onChange={(e) => setLoras(e.target.value)} />

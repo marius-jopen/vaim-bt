@@ -66,7 +66,7 @@ const FindRelevantSentence = () => {
         disabled={loading}
       />
       <TextAreaInput
-        label="Enter a sentence"
+        label="My wish for the future in Germany is:"
         value={sentence}
         onChange={(e) => setSentence(e.target.value)}
       />
