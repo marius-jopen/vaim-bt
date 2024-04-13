@@ -32,8 +32,8 @@ const handleSubmitAnimation = async (
   const parameters = {
     deforum_settings: {
       "prompts": {
-        "0": `${formattedPrompts} // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
-        [keyframe.toString()]: `${formattedPrompts} // ${positivePrompts} ${loras} --neg ${negativePrompts}`
+        "0": `(a photo of a ${formattedPrompts}:3) // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
+        [keyframe.toString()]: `(a photo of a ${formattedPrompts}:3) // ${positivePrompts} ${loras} --neg ${negativePrompts}`
       },
       "max_frames": parseInt(maxFrames, 10),
       "cn_1_enabled": cn1Enabled,
