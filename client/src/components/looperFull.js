@@ -41,7 +41,11 @@ function LooperFull() {
         <>
         <div className='relative'>
           {currentItem.soundtrack && (
-            <div className="caption absolute bottom-8 w-full text-center font-bold px-8">{currentItem.soundtrack}</div>
+            <div className="caption">
+              <div className='caption-box'>
+                {currentItem.soundtrack}
+              </div>
+            </div>
           )}
           <img className='cursor-pointer rounded-xl' src={currentImageUrl} alt="Gallery" onClick={togglePlayPause} />
         </div>

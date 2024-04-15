@@ -32,14 +32,14 @@ const handleSubmitAnimation = async (
   const parameters = {
     deforum_settings: {
       "prompts": {
-        "0": `( ${formattedPrompts}:1) // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
-        [keyframe.toString()]: `(${formattedPrompts}:1) // ${positivePrompts} ${loras} --neg ${negativePrompts}`
+        "0": `( ${formattedPrompts}:2) // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
+        [keyframe.toString()]: `(${formattedPrompts}:2) // ${positivePrompts} ${loras} --neg ${negativePrompts}`
       },
       "max_frames": parseInt(maxFrames, 10),
       "cn_1_enabled": cn1Enabled,
       "cn_1_vid_path": cn1Enabled ? cn1VidPath : undefined,
-      "rotation_3d_x": "0: (" + rotation_3d_x / 4 + ")",
-      "rotation_3d_y": "0: (" + rotation_3d_y / 4 + ")",
+      "rotation_3d_x": "0: (" + rotation_3d_x / 2 + ")",
+      "rotation_3d_y": "0: (" + rotation_3d_y / 2 + ")",
       "rotation_3d_z": "0: (0)",
       "soundtrack_path": speech || " ",
       positivePromptsSave: positivePrompts,
