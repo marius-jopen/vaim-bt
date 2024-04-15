@@ -9,7 +9,7 @@ const handleSubmitImage = async (
   // console.log(formattedPrompts)
   
   const parameters = {
-    prompt: `(A photo of a ${formattedPrompts}:3) ${positivePrompts} ${loras}`,
+    prompt: `( ${formattedPrompts}:1) ${positivePrompts} ${loras}`,
     negative_prompt: negativePrompts,
     positivePromptsSave: positivePrompts,
     lorasSave: loras,

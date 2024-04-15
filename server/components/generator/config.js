@@ -18,11 +18,11 @@
 
 const baseConfig = {
 	seed: 1,
-	steps: 20,
+	steps: 50,
 	width: 1216,
 	height: 832,
-	cfgScale: 5,
-	samplerName: "DPM++ 3M SDE",
+	cfgScale: 7,
+	samplerName: "Euler a",
 };
 
 const getImageConfig = () => {
@@ -52,24 +52,24 @@ const getVideoConfig = () => {
 const getVideoConfigModified = () => {
 	return {
 		"color_coherence": "LAB",
-		"strength": 0.7, // Init IMAGE strength, but it also influences the general strength
-		"strength_schedule": "0: (0.7)", // General strength
-		"diffusion_cadence": 4,
+		"strength": 0.65, // Init IMAGE strength, but it also influences the general strength
+		"strength_schedule": "0: (0.65)", // General strength
+		"diffusion_cadence": 1,
 		"optical_flow_cadence": "Farneback",
 		"optical_flow_redo_generation": "None",
 		"animation_mode": "3D",
 		"translation_x": "0: (0)",
 		"translation_y": "0: (0)",
-		"translation_z": "0: (0.4)",
+		"translation_z": "0: (1.8)",
 		"transform_center_x": "0: (0.5)",
 		"transform_center_y": "0: (0.5)",
 		"fov_schedule": "0: (70)",
-		"fps": 15,
+		"fps": 10,
 		"cn_1_model": "qrpatternSdxl_v01256512eSdxl [49d72174]",
 		"cn_1_resize_mode": "Inner Fit (Scale to Fit)",
-		"frame_interpolation_engine": "None",
+		"frame_interpolation_engine": "FILM",
 		"frame_interpolation_x_amount": 4,
-		"frame_interpolation_slow_mo_enabled": false,
+		"frame_interpolation_slow_mo_enabled": true,
 		"frame_interpolation_slow_mo_amount": 3,
 	};
 };

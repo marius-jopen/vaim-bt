@@ -13,7 +13,7 @@ import { usePrompts } from '../promptsContext'; // Adjust the path as necessary
 export default function Form() {
   // const [prompts, setPrompts] = useState('beautiful lady, (freckles), big smile, ruby eyes, short hair, dark makeup, head and shoulders portrait, cover');
   const [maxFrames, setMaxFrames] = useState('300');
-  const [positivePrompts, setPositivePrompts] = useState('(flowers:0.6), (clean, futuristic:1.2), (coloured background:2), (saturated colours:1.2), flat_color, (symmetry:1.2), ');
+  const [positivePrompts, setPositivePrompts] = useState('(flowers:0.6), (clean:1.2), (coloured background:2), (saturated colours:1.2), flat_color, (symmetry:0.6),  ');
   const [negativePrompts, setNegativePrompts] = useState('blurry, unsharp, grayscale, bw, bad photo, bad photography, bad art:1.4), (watermark, signature, text font, username, error, logo, words, letters, digits, autograph, trademark, name:1.2), (bad hands, bad anatomy, bad body, bad face, bad teeth, bad arms, bad legs, deformities:1.3), morbid, ugly, mutated malformed, mutilated, poorly lit, bad shadow, draft, cropped, out of frame, cut off, censored, jpeg artifacts, glitch, duplicate');
   const [loras, setLoras] = useState(' <lora:add-detail-xl:1>  <lora:Wake_Up_sdxl:1>');
   const [cn1Enabled, setCn1Enabled] = useState(false);

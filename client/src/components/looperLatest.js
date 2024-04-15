@@ -31,7 +31,7 @@ function LooperLatest() {
     if (images.length > 0 && isPlaying) {
       const interval = setInterval(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
-      }, 1000 / 15); // For example, 15 frames per second
+      }, 1000 / 3); // For example, 15 frames per second
 
       return () => clearInterval(interval);
     }
@@ -43,7 +43,7 @@ function LooperLatest() {
 
   return (
     <div className="looper-latest">
-      {images.length > 0 ? (
+      {images.length > 0 && currentImageUrl ? (
         <>
         <div className='relative'>
           {soundtrackInfo && (
