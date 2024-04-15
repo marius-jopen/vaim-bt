@@ -1,4 +1,4 @@
-// FINAL NORMAL
+// FINAL INTERPOLATE
 
 import fs from 'fs';
 import path from 'path';
@@ -18,8 +18,16 @@ class Looper {
 
     let folderData = [];
     for (const dir of directories) {
-      const dirPath = path.join(this.baseDir, dir.name); // Use dir.name to get the string name of the directory
-      const files = await this.readDirForPngFiles(dirPath);
+      const dirPath = path.join(this.baseDir, dir.name);
+      const subfolders = await fs.promises.readdir(dirPath, { withFileTypes: true });
+      const imagesSubfolder = subfolders.find(subfolder => subfolder.isDirectory());
+
+      if (!imagesSubfolder) {
+        continue; // Skip if no subfolder found
+      }
+
+      const imagesFolderPath = path.join(dirPath, imagesSubfolder.name);
+      const files = await this.readDirForPngFiles(imagesFolderPath);
       const soundtrackPath = await this.getSoundtrackPath(dirPath);
       const relativeFiles = files.map(file => ({
         image: path.relative(this.baseDir, file),
