@@ -1,24 +1,6 @@
-// const baseConfig = {
-// 	seed: 1,
-// 	steps: 4,
-// 	width: 832,
-// 	height: 1216,
-// 	cfgScale: 3,
-// 	samplerName: "DPM++ SDE",
-// };
-
-// const baseConfig = {
-// 	seed: 1,
-// 	steps: 20,
-// 	width: 832,
-// 	height: 1216,
-// 	cfgScale: 5,
-// 	samplerName: "DPM++ 3M SDE",
-// };
-
 const baseConfig = {
 	seed: 1,
-	steps: 50,
+	steps: 40,
 	width: 1216,
 	height: 832,
 	cfgScale: 7,
@@ -60,7 +42,7 @@ const getVideoConfigModified = () => {
 		"animation_mode": "3D",
 		"translation_x": "0: (0)",
 		"translation_y": "0: (0)",
-		"translation_z": "0: (1.8)",
+		"translation_z": "0: (2.2)",
 		"transform_center_x": "0: (0.5)",
 		"transform_center_y": "0: (0.5)",
 		"fov_schedule": "0: (70)",
@@ -73,6 +55,31 @@ const getVideoConfigModified = () => {
 		"frame_interpolation_slow_mo_amount": 3,
 	};
 };
+
+// const getVideoConfigModified = () => {
+// 	return {
+// 		"color_coherence": "LAB",
+// 		"strength": 0.65, // Init IMAGE strength, but it also influences the general strength
+// 		"strength_schedule": "0: (0.65)", // General strength
+// 		"diffusion_cadence": 4,
+// 		"optical_flow_cadence": "Farneback",
+// 		"optical_flow_redo_generation": "None",
+// 		"animation_mode": "3D",
+// 		"translation_x": "0: (0)",
+// 		"translation_y": "0: (0)",
+// 		"translation_z": "0: (1)",
+// 		"transform_center_x": "0: (0.5)",
+// 		"transform_center_y": "0: (0.5)",
+// 		"fov_schedule": "0: (70)",
+// 		"fps": 15,
+// 		"cn_1_model": "qrpatternSdxl_v01256512eSdxl [49d72174]",
+// 		"cn_1_resize_mode": "Inner Fit (Scale to Fit)",
+// 		"frame_interpolation_engine": "None",
+// 		"frame_interpolation_x_amount": 1,
+// 		"frame_interpolation_slow_mo_enabled": false,
+// 		"frame_interpolation_slow_mo_amount": 1,
+// 	};
+// };
 
 const getVideoConfigOriginal = () => {
 	return {
@@ -131,7 +138,7 @@ const getVideoConfigOriginal = () => {
 		"enable_clipskip_scheduling": false,
 		"clipskip_schedule": "0: (2)",
 		"enable_noise_multiplier_scheduling": true,
-		"noise_multiplier_schedule": "0: (1.05)",
+		"noise_multiplier_schedule": "0: (1.00)", // 1.05 orognal
 		"resume_from_timestring": false,
 		"resume_timestring": "20230129210106",
 		"enable_ddim_eta_scheduling": false,

@@ -90,7 +90,7 @@ export default function Form() {
           </div>
         </div>
 
-        <div className='bg-black flex gap-8 pt-6 pb-2 px-4'>
+        <div className='bg-black flex gap-8 pt-6 pb-2 px-6'>
           <div className='text-white w-full'>
             <LooperSwitch />
           </div>
@@ -125,7 +125,7 @@ export default function Form() {
               <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-24" label="Loras" value={loras} onChange={(e) => setLoras(e.target.value)} />
             </div>
        
-            <div className='text-neutral-400 text-right	'>
+            <div className='text-neutral-400 text-right	pb-2'>
               WortWandel, by Marius Jopen & Paula Kühn
             </div>
           </div>

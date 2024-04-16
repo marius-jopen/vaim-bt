@@ -43,7 +43,7 @@ function ImagesPreview() {
                   <button
                     onClick={handlePrevClick}
                     type="button"
-                    className="relative inline-flex items-center rounded-l-full bg-white px-2 py-2 text-black border-r-2 border-black"
+                    className="relative inline-flex items-center rounded-l-full bg-neutral-400 px-2 py-2 text-black border-r-2 border-black"
                   >
                     <span className="sr-only">Previous</span>
                     <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -51,7 +51,7 @@ function ImagesPreview() {
                   <button
                     onClick={handleNextClick}
                     type="button"
-                    className="relative -ml-px inline-flex items-center rounded-r-full bg-white px-2 py-2 text-black "
+                    className="relative -ml-px inline-flex items-center rounded-r-full bg-neutral-400 px-2 py-2 text-black "
                   >
                     <span className="sr-only">Next</span>
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />

@@ -2,13 +2,13 @@ const handleSubmitAnimation = async (
   e, { prompts, positivePrompts, loras }, setResponseMessage
 ) => {
   e.preventDefault();
-  let maxFrames = 50;
+  let maxFrames = 300;
   // let loras = "<lora:add-detail-xl:1>  <lora:Wake_Up_sdxl:1>"
   let negativePrompts = ""
 
   const mainPromptText = prompts.prompts || "";
   const speech = prompts.speech || "";
-  const keyframe = Math.floor(parseInt(maxFrames, 10) / 4);
+  const keyframe = Math.floor(parseInt(maxFrames, 10) / 5);
   const formattedPrompts = mainPromptText.replace(/\n/g, ' ');
 
    // Generate initial random values
@@ -35,8 +35,8 @@ const handleSubmitAnimation = async (
   const parameters = {
     deforum_settings: {
       "prompts": {
-        "0": `( ${formattedPrompts}:2) // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
-        [keyframe.toString()]: `(${formattedPrompts}:2) // ${positivePrompts} ${loras} --neg ${negativePrompts}`
+        "0": `${formattedPrompts} // ${positivePrompts} ${loras} --neg ${negativePrompts}`,
+        [keyframe.toString()]: `${formattedPrompts} // ${positivePrompts} ${loras} --neg ${negativePrompts}`
       },
       "max_frames": parseInt(maxFrames, 10),
       "cn_1_enabled": false,

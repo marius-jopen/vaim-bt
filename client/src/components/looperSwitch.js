@@ -19,13 +19,11 @@ function LooperSwitch() {
         <button
           onClick={toggleDisplayMode}
           type="button"
-          className="flex justify-center rounded-full pt-0.5 pb-1 px-6 text-lg text-black bg-white"
+          className="flex justify-center rounded-full pt-0.5 pb-1 px-6 text-lg text-black bg-neutral-400"
         >
           {displayMode === 'latest' ? 'Vorschau Bild' : 'Vorschau Video'}
         </button>
       </div>
-
-
     </div>
   );
 }
