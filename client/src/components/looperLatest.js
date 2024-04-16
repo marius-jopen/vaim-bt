@@ -60,7 +60,7 @@ function LooperLatest() {
           </div> */}
         </>
       ) : (
-        <div>No images found.</div>
+        <div className='text-xl'>No images found.</div>
       )}
     </div>
   );

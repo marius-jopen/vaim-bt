@@ -1,7 +1,7 @@
 const TextAreaInput = ({ label, value, onChange, outsideClass, big }) => (
   <div className="mb-4 relative">
     {big &&
-      <label htmlFor={label} className="absolute top-2 left-3 block text-neutral-400">
+      <label htmlFor={label} className="absolute top-2 left-3 block text-neutral-400 text-xl">
         {label}
       </label>
     }
@@ -12,7 +12,7 @@ const TextAreaInput = ({ label, value, onChange, outsideClass, big }) => (
         name={label}
         value={value}
         onChange={onChange}
-        className={`${outsideClass} ${big ? 'pt-8' : ''} block w-full border-none`}
+        className={`${outsideClass} ${big ? 'pt-[38px]' : ''} block w-full border-none`}
         defaultValue={''}
       />
     </div>

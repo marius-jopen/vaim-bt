@@ -7,9 +7,9 @@ import LooperSwitch from '../looperSwitch';
 import { usePrompts } from '../promptsContext';
 
 export default function Form() {
-  const [positivePrompts, setPositivePrompts] = useState('(flowers:0.6), (clean:1.2), (coloured background:2), (saturated colours:1.2), flat_color, (symmetry:0.6)');
-  const [negativePrompts, setNegativePrompts] = useState('blurry, unsharp, grayscale, bw, bad photo, bad photography, bad art:1.4), (watermark, signature, text font, username, error, logo, words, letters, digits, autograph, trademark, name:1.2), (bad hands, bad anatomy, bad body, bad face, bad teeth, bad arms, bad legs, deformities:1.3), morbid, ugly, mutated malformed, mutilated, poorly lit, bad shadow, draft, cropped, out of frame, cut off, censored, jpeg artifacts, glitch, duplicate');
-  const [loras, setLoras] = useState('');
+  const [positivePrompts, setPositivePrompts] = useState('in the style of unreal engine futuristic mirror');
+  // const [negativePrompts, setNegativePrompts] = useState('blurry, unsharp, grayscale, bw, bad photo, bad photography, bad art:1.4), (watermark, signature, text font, username, error, logo, words, letters, digits, autograph, trademark, name:1.2), (bad hands, bad anatomy, bad body, bad face, bad teeth, bad arms, bad legs, deformities:1.3), morbid, ugly, mutated malformed, mutilated, poorly lit, bad shadow, draft, cropped, out of frame, cut off, censored, jpeg artifacts, glitch, duplicate');
+  const [loras, setLoras] = useState(' <lora:unreal_engine_futuristic_mirror_style-000010:1>');
   const [responseMessage, setResponseMessage] = useState('');
   const { prompts, setPrompts } = usePrompts();
   const [caption, setCaption] = useState('');
@@ -19,12 +19,12 @@ export default function Form() {
 
   const handleAnimationSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitAnimation(e, { caption, prompts, positivePrompts, negativePrompts, loras }, setResponseMessage);
+    await handleSubmitAnimation(e, { caption, prompts, positivePrompts, loras }, setResponseMessage);
   };
 
   const handleImageSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitImage(e, { prompts, positivePrompts, negativePrompts, loras }, setResponseMessage);
+    await handleSubmitImage(e, { prompts, positivePrompts, loras }, setResponseMessage);
   };
 
   const generatePoem = async (event) => {
@@ -118,9 +118,12 @@ export default function Form() {
           </div>
 
           <div className='text-white w-full'>
-            <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-20" label="Haupt Prompt" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
-            <TextAreaInput big={true} outsideClass="text-black rounded-2xl" label="Unterstützende Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
-            <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-24" label="Loras" value={loras} onChange={(e) => setLoras(e.target.value)} />
+            <TextAreaInput big={true} outsideClass="text-black text-xl rounded-2xl h-[420px]" label="Prompt" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
+            
+            <div className='hidden'>
+              <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-20" label="Unterstützende Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
+              <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-24" label="Loras" value={loras} onChange={(e) => setLoras(e.target.value)} />
+            </div>
        
             <div className='text-neutral-400 text-right	'>
               WortWandel, by Marius Jopen & Paula Kühn

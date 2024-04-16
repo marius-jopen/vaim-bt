@@ -4,7 +4,7 @@ import Form from './components/form/form';
 
 function App() {
   useEffect(() => {
-    document.title = "vAIm";
+    document.title = "WordWandel UI";
   }, []);
 
   return (
