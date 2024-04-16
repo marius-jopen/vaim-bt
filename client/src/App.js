@@ -9,7 +9,7 @@ function App() {
 
   return (
     <PromptsProvider>
-      <div className="Appantialiased">
+      <div className="App antialiased">
         <Form />
       </div>
     </PromptsProvider>

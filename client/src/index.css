@@ -14,7 +14,7 @@ body  {
 
 .caption {
     position: absolute;
-    bottom: 20px;
+    bottom: 3vw;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -22,16 +22,16 @@ body  {
 }
 
 .caption-box {
-    background-color: rgb(255 255 255 / 50%); 
-    font-size: 15px;
-    line-height: 18px;
-    margin-left: 20px;
-    margin-right: 20px;
-    color: black;
-    border-radius: 20px;
+    font-size: 4.5vw;
+    line-height: 4.5vw;
     text-align: center;
-    padding: 10px 20px 12px 20px;
-    backdrop-filter: blur(8px); /* Chrome and Opera */
-    box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
-    font-weight: 700;
+    color: #00ff94;
+    width: 90%;
+    -webkit-text-fill-color: #00ff94; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-shadow:  1px  1px 1px black,
+                  1px -1px 1px black,
+                 -1px  1px 1px black,
+                 -1px -1px 1px black;
 }
