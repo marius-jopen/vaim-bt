@@ -1,8 +1,8 @@
 const handleSubmitAnimation = async (
-  e, { prompts, maxFrames, positivePrompts, cn1VidPath, loras, negativePrompts, cn1Enabled }, setResponseMessage
+  e, { prompts, positivePrompts, loras, negativePrompts }, setResponseMessage
 ) => {
   e.preventDefault();
-  
+  let maxFrames = 300;
   const mainPromptText = prompts.prompts || "";
   const speech = prompts.speech || "";
   const keyframe = Math.floor(parseInt(maxFrames, 10) / 4);
@@ -36,8 +36,8 @@ const handleSubmitAnimation = async (
         [keyframe.toString()]: `(${formattedPrompts}:2) // ${positivePrompts} ${loras} --neg ${negativePrompts}`
       },
       "max_frames": parseInt(maxFrames, 10),
-      "cn_1_enabled": cn1Enabled,
-      "cn_1_vid_path": cn1Enabled ? cn1VidPath : undefined,
+      "cn_1_enabled": false,
+      "cn_1_vid_path": "PATH TO VIDEO",
       "rotation_3d_x": "0: (" + rotation_3d_x / 2 + ")",
       "rotation_3d_y": "0: (" + rotation_3d_y / 2 + ")",
       "rotation_3d_z": "0: (0)",

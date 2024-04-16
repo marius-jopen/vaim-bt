@@ -37,7 +37,7 @@ function LooperFull() {
 
   return (
     <div className="looper">
-      {data.length > 0 && currentImageUrl ? (
+      {data.length > 0 && currentItem.image ? (
         <>
         <div className='relative'>
           {currentItem.soundtrack && (
