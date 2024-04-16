@@ -2,7 +2,7 @@ const handleSubmitAnimation = async (
   e, { prompts, positivePrompts, loras }, setResponseMessage
 ) => {
   e.preventDefault();
-  let maxFrames = 300;
+  let maxFrames = 100;
   // let loras = "<lora:add-detail-xl:1>  <lora:Wake_Up_sdxl:1>"
   let negativePrompts = ""
 
