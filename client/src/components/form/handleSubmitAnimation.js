@@ -1,8 +1,11 @@
 const handleSubmitAnimation = async (
-  e, { prompts, positivePrompts, loras, negativePrompts }, setResponseMessage
+  e, { prompts, positivePrompts, loras }, setResponseMessage
 ) => {
   e.preventDefault();
   let maxFrames = 300;
+  // let loras = "<lora:add-detail-xl:1>  <lora:Wake_Up_sdxl:1>"
+  let negativePrompts = ""
+
   const mainPromptText = prompts.prompts || "";
   const speech = prompts.speech || "";
   const keyframe = Math.floor(parseInt(maxFrames, 10) / 4);
@@ -42,10 +45,10 @@ const handleSubmitAnimation = async (
       "rotation_3d_y": "0: (" + rotation_3d_y / 2 + ")",
       "rotation_3d_z": "0: (0)",
       "soundtrack_path": speech || " ",
-      positivePromptsSave: positivePrompts,
-      negativePromptsSave: negativePrompts,
-      lorasSave: loras,
-      promptsSave: formattedPrompts,
+      positivePromptsSave: "positivePrompts",
+      negativePromptsSave: "negativePrompts",
+      lorasSave: "loras",
+      promptsSave: "formattedPrompts",
     }
   };
 

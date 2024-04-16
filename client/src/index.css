@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Haas';
+    src: url('./assets/NeueHaasUnica-Black.woff2')
+}
 
 body  {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Haas';
+    background-color: black;
 }
 
 .caption {

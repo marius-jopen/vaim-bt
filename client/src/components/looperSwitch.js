@@ -4,43 +4,28 @@ import LooperLatest from './looperLatest'; // Adjust the path as necessary
 import ImagesPreview from './imagesPreview'; // Adjust the path as necessary
 
 function LooperSwitch() {
-  const [displayMode, setDisplayMode] = useState('full');
+  const [displayMode, setDisplayMode] = useState('latest');
 
-  const handleDisplayModeChange = (mode) => {
-    setDisplayMode(mode);
+  const toggleDisplayMode = () => {
+    setDisplayMode(displayMode === 'latest' ? 'image' : 'latest');
   };
-
-  const isActive = (mode) => displayMode === mode ? 'bg-gray-100' : 'bg-white';
 
   return (
     <div className="looper-switch">
-      <span className="flex rounded-md shadow-sm  mb-4">
-        <button
-            onClick={() => handleDisplayModeChange('full')}
-          type="button"
-          className={`w-full relative  text-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('full')}`}
-        >
-          Full
-        </button>
-        <button
-          onClick={() => handleDisplayModeChange('latest')}
-          type="button"
-          className={`w-full relative -ml-px text-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('latest')}`}
-        >
-          Current
-        </button>
-        <button
-          onClick={() => handleDisplayModeChange('image')}
-          type="button"
-          className={`w-full relative -ml-px text-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 ${isActive('image')}`}
-        >
-          Images
-        </button>
-      </span>
-
-      {displayMode === 'full' && <LooperFull />}
       {displayMode === 'latest' && <LooperLatest />}
       {displayMode === 'image' && <ImagesPreview />}
+
+      <div className="flex rounded-md shadow-sm mt-4">
+        <button
+          onClick={toggleDisplayMode}
+          type="button"
+          className="flex justify-center rounded-full pt-0.5 pb-1 px-6 text-lg text-black bg-white"
+        >
+          {displayMode === 'latest' ? 'Vorschau Bild' : 'Vorschau Video'}
+        </button>
+      </div>
+
+
     </div>
   );
 }

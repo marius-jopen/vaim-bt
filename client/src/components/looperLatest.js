@@ -46,18 +46,18 @@ function LooperLatest() {
       {images.length > 0 && currentImageUrl ? (
         <>
         <div className='relative'>
-          {soundtrackInfo && (
+          {/* {soundtrackInfo && (
             <div className="caption">
               <div className='caption-box'>
                 {soundtrackInfo}
               </div>
             </div>
-          )}
-          <img src={currentImageUrl} alt="Gallery" className="cursor-pointer rounded-xl" onClick={togglePlayPause} />
+          )} */}
+          <img src={currentImageUrl} alt="Gallery" className="cursor-pointer rounded-2xl" onClick={togglePlayPause} />
         </div>
-          <div className='h-12'>
+          {/* <div className='h-12'>
             <div className="text-xs text-gray-500 mt-2 mb-1">Image Path: {images[currentIndex]}</div>
-          </div>
+          </div> */}
         </>
       ) : (
         <div>No images found.</div>

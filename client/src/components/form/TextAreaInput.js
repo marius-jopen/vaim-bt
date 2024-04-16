@@ -1,15 +1,18 @@
-const TextAreaInput = ({ label, value, onChange, outsideClass }) => (
-  <div className="mb-4">
-    <label htmlFor={label} className="block text-sm font-medium leading-6 text-gray-900">
-      {label}
-    </label>
+const TextAreaInput = ({ label, value, onChange, outsideClass, big }) => (
+  <div className="mb-4 relative">
+    {big &&
+      <label htmlFor={label} className="absolute top-2 left-3 block text-neutral-400">
+        {label}
+      </label>
+    }
+
     <div className="mt-0.5">
       <textarea
         rows={4}
         name={label}
         value={value}
         onChange={onChange}
-        className={`${outsideClass} block w-full border-none`}
+        className={`${outsideClass} ${big ? 'pt-8' : ''} block w-full border-none`}
         defaultValue={''}
       />
     </div>

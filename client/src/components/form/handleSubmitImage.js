@@ -1,22 +1,22 @@
 const handleSubmitImage = async (
-  e, { prompts, positivePrompts, loras, negativePrompts, maxFrames,cn1VidPath,cn1Enabled }, setResponseMessage
+  e, { prompts, positivePrompts, loras}, setResponseMessage
 ) => {
   e.preventDefault();
-  const mainPromptText = prompts.prompts || ""; // Access the 'prompts' string from the prompts object
+  // let loras = "<lora:add-detail-xl:1>  <lora:Wake_Up_sdxl:1>"
+  let negativePrompts = ""
 
+  const mainPromptText = prompts.prompts || ""; // Access the 'prompts' string from the prompts object
   const formattedPrompts = mainPromptText.replace(/\n/g, ' ');
 
-  // console.log(formattedPrompts)
-  
   const parameters = {
     prompt: `( ${formattedPrompts}:2) ${positivePrompts} ${loras}`,
     negative_prompt: negativePrompts,
-    positivePromptsSave: positivePrompts,
-    lorasSave: loras,
-    promptsSave: formattedPrompts,
-    maxframesSave: maxFrames,
-    cn1VidPathSave: cn1VidPath,
-    cn1EnabledSave: cn1Enabled,
+    positivePromptsSave: "positivePrompts",
+    lorasSave: "loras",
+    promptsSave: "formattedPrompts",
+    maxframesSave: "maxFrames",
+    cn1VidPathSave: "cn1VidPath",
+    cn1EnabledSave: "cn1Enabled",
 
   };
 
