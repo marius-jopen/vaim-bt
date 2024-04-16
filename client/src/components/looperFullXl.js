@@ -47,7 +47,7 @@ function LooperFull() {
               </div>
             </div>
           )}
-          <img className='h-screen w-screen object-cover' src={currentImageUrl} alt="Gallery" />
+          <img className='img-full h-screen w-screen object-cover' src={currentImageUrl} alt="Gallery" />
         </div>
           {/* <div className='h-12'>
             <div className="text-xs text-gray-500 mt-2 mb-1">Path: {currentItem.image}</div>

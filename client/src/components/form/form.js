@@ -118,16 +118,16 @@ export default function Form() {
           </div>
 
           <div className='text-white w-full'>
-            <TextAreaInput big={true} outsideClass="text-black text-xl rounded-2xl h-[420px]" label="Prompt" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
+            <TextAreaInput big={true} outsideClass="text-black text-xl rounded-2xl h-[350px]" label="Prompt" value={prompts.prompts} onChange={(e) => setPrompts({...prompts, prompts: e.target.value})} />
             
             <div className='hidden'>
               <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-20" label="Unterstützende Prompts" value={positivePrompts} onChange={(e) => setPositivePrompts(e.target.value)} />
               <TextAreaInput big={true} outsideClass="text-black rounded-2xl h-24" label="Loras" value={loras} onChange={(e) => setLoras(e.target.value)} />
             </div>
        
-            <div className='text-neutral-400 text-right	pb-2'>
+            {/* <div className='text-neutral-400 text-right	pb-2'>
               WortWandel, by Marius Jopen & Paula Kühn
-            </div>
+            </div> */}
           </div>
 
         </div>
