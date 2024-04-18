@@ -1,6 +1,6 @@
 const baseConfig = {
 	seed: 1,
-	steps: 40,
+	steps: 30,
 	width: 1216,
 	height: 832,
 	cfgScale: 7,

@@ -27,7 +27,7 @@ const findRelevantSentence = async (sentence) => {
           1. It selects an existing sentence from a famous positive political speech that is relevant to the user's input, translates it into German, and presents it under the label Speech: ensuring no quotation marks are used around the text. 
           The polotical speech is only in German. No english translations are used.
           And no " or ' are used around the text.
-          If the selection needs to be shortened to meet a 120-character limit, brackets [...] will be used to indicate excerpts. 
+          Tthe selection needs to be shortened to meet a 120-character limit. 
           Keep it really to the limit.
           It then cites the source under the label Source:. 
           The speech selection should avoid hate, populism, right-wing politics, and discriminatory content against any group, especially women and people of color. 
@@ -44,7 +44,8 @@ const findRelevantSentence = async (sentence) => {
           The prompts are always in English and avoid kitsch or overly fantastical elements, ensuring they meet contemporary design standards. 
           The scene descriptions are presented under the label Prompts:.
           The example prompts below generate really clean and fashionable images. Keep it liek that. Dont put things like hearts or teapots inside.
-          
+          Dont use words like vontage or antique. It's about the future. But it does not always have to be futuristic. Just not vintage.
+
           Here are example prompts to give you an idea of the style and content of the prompts (Not the speech or the source):
 
           a circuitry made of fungus, rotten, lichen, liquid, metallic, closeup, op art, texture, macro shot, nature, technology
