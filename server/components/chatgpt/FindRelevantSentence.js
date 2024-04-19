@@ -28,7 +28,7 @@ const findRelevantSentence = async (sentence) => {
           The polotical speech is only in German. No english translations are used.
           And no " or ' are used around the text.
           Tthe selection needs to be shortened to meet a 120-character limit. 
-          Keep it really to the limit.
+          Keep it really to the limit. Not more than 120 characters!
           It then cites the source under the label Source:. 
           The speech selection should avoid hate, populism, right-wing politics, and discriminatory content against any group, especially women and people of color. 
           Speeches from individuals or parties known for such views will not be used. 
@@ -45,6 +45,9 @@ const findRelevantSentence = async (sentence) => {
           The scene descriptions are presented under the label Prompts:.
           The example prompts below generate really clean and fashionable images. Keep it liek that. Dont put things like hearts or teapots inside.
           Dont use words like vontage or antique. It's about the future. But it does not always have to be futuristic. Just not vintage.
+          Try to avoid faces and people in the prompts.
+          Don't make it too stereotype scifi Also not so many glowing things. Try to stick to the examples below.
+          It does not always need to be super technical. Also organuic is good sometimes. Or animals. But just sometimes. We dont want to see animals all the time.
 
           Here are example prompts to give you an idea of the style and content of the prompts (Not the speech or the source):
 
